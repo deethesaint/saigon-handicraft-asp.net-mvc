@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Contents/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/d60cfc64c3.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="banner" class="container-fluid">
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-5">
+                <div class="container-fluid">
+                    <img src="~/Assets/logo.png" style="width:60%"/>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="container-fluid mt-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="container rounded bg-light" style="height: 200px">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Cơ sở Thủ Đức</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p><i class="fa-solid fa-location-dot"></i> Địa chỉ: Lầu 3, Tòa nhà OneHub SaiGon Complex Tower, Đ. D1, Phường Tân Phú, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
+                                        <p><i class="fa-solid fa-phone"></i> Số điện thoại: +84.366775502</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="container rounded bg-light" style="height: 200px">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Cơ sở Quận 1</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p><i class="fa-solid fa-location-dot"></i> Địa chỉ: Lầu 36, Tòa nhà Bitexco, Số 02 Hải Triều, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí Minh</p>
+                                        <p><i class="fa-solid fa-phone"></i> Số điện thoại: +84.335271451</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mainNav" class="container-fluid border-top">
+        
+        <div class="row">
+            <div class="col-12 p-0">
+                <ul class="nav navbar bg-light navbar-light">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-dark" href="#">
+                            <i class="fa-solid fa-house"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-dark" href="#">
+                            <i class="fa-solid fa-compass"></i>
+                            Giới thiệu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button id="btnDropdown" class="btn btn-light dropdown-toggle font-weight-bold" onmouseover="" type="button" data-toggle="dropdown">
+                                <i class="fa-solid fa-list"></i>
+                                Sản phẩm
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnDropdown">
+                                <a class="dropdown-item font-weight-bold" href="#">
+                                    item1
+                                </a>
+                                <a class="dropdown-item font-weight-bold" href="#">
+                                    item2
+                                </a>
+                                <a class="dropdown-item font-weight-bold" href="#">
+                                    item3
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-dark" href="#">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                            Hướng dẫn mua hàng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-dark" href="#">
+                            <i class="fa-solid fa-phone"></i>
+                            Liên hệ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="container-fluid">
+                            <form class="d-flex">
+                                <input class="form-control mr-2" placeholder="Tìm kiếm sản phẩm" type="text" />
+                                <input class="btn btn-outline-dark" type="submit" value="Search" />
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row bg-light border-top border-bottom p-2">
+            <div class="col-6">
+
+            </div>
+            <div class="col-6 text-right font-weight-bold">
+                <a class="btn btn-outline-dark" style="width: 105px" href="#">Đăng nhập</a>
+                <a class="btn btn-outline-dark" style="width: 105px" href="#">Đăng ký</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-3 mb-3">
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-11 pl-0">
+                @Html.Action("Breadcrumb", "Home")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+
+            </div>
+            <div class="col-9 border-top border-left border-right" style="min-height: 1000px">
+                @RenderBody()
+            </div>
+            <div class="col-2">
+                @Html.Action("Sidebar", "Home")
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid bg-light border-top">
+                <div class="row mt-4">
+                    <div class="col-3">
+                        <div class="container-fluid">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h5>THÔNG TIN</h5>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Giới thiệu SHS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Hệ thống cửa hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Tuyển dụng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Liên hệ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="container-fluid">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h5>TRỢ GIÚP</h5>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Chính sách khách hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Phương thức thanh toán</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Chính sách mua hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Chính sách giao hàng</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Chính sách đổi trả</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Chính sách bảo hành</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="container-fluid">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h5>THANH TOÁN</h5>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Visa / MasterCard / JCB</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">ATM / Internet Banking / Ví điện tử</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Quét mã QR</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Mua trước trả sau</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">Thanh toán COD</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="container-fluid">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="fa-brands fa-facebook fa-2xl"></i> Facebook
+                                    </a>
+                                    <a class="nav-link" style="color: plum" href="#">
+                                        <i class="fa-brands fa-instagram fa-2xl"></i> Instagram
+                                    </a>
+                                    <a class="nav-link text-dark" href="#">
+                                        <i class="fa-brands fa-tiktok fa-2xl"></i> Tiktok
+                                    </a>
+                                    <a class="nav-link text-danger" href="#">
+                                        <i class="fa-brands fa-youtube fa-2xl"></i> Youtube
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <img src="~/Assets/logoSaleNoti.png" style="width: 70%" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container-fluid border lead text-center" style="font-size: 12px">
+                        <p class="m-0">© Copyright @DateTime.Now.Year SaiGon Handicraft Shop - All Rights Reserved.</p>
+                        <p class="m-0">Địa chỉ: 189 - 197, Dương Bá Trạc, Phường 1, Quận 8, TP. Hồ Chí Minh | MST: XXXXXXXXXX</p>
+                        <p class="m-0">Website designed by VuThanhDuong</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // Lấy chiều cao của phần header
+            var headerHeight = $("#banner").height();
+
+            // Sự kiện cuộn chuột
+            $(window).scroll(function () {
+                // Nếu cuộn chuột xuống đến một độ cao lớn hơn chiều cao của header
+                if ($(this).scrollTop() > headerHeight) {
+                    // Thêm class 'fixed-top' vào menu điều hướng
+                    $("#mainNav").addClass("fixed-top");
+                } else {
+                    // Xóa class 'fixed-top' khỏi menu điều hướng
+                    $("#mainNav").removeClass("fixed-top");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
