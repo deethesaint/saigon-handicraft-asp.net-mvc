@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using VuThanhDuong_DA.Models
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -17,7 +19,7 @@
             </div>
             <div class="col-5">
                 <div class="container-fluid">
-                    <img src="~/Assets/logo.png" style="width:60%"/>
+                    <img src="~/Assets/logo.png" style="width:60%" />
                 </div>
             </div>
             <div class="col-6">
@@ -59,7 +61,7 @@
         </div>
     </div>
     <div id="mainNav" class="container-fluid border-top">
-        
+
         <div class="row">
             <div class="col-12 p-0">
                 <ul class="nav navbar bg-light navbar-light">
@@ -121,8 +123,22 @@
 
             </div>
             <div class="col-6 text-right font-weight-bold">
-                <a class="btn btn-outline-dark" style="width: 105px" href="#">Đăng nhập</a>
-                <a class="btn btn-outline-dark" style="width: 105px" href="#">Đăng ký</a>
+                @{
+
+                    if (Session["currentUser"] != null)
+                    {
+                        user_account user = Session["currentUser"] as user_account;
+                        <p class="font-weight-normal m-0 mr-2 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
+                        <button class="btn btn-outline-info" style="width: 105px"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</button>
+                        <button class="btn btn-outline-primary" style="width: 105px">Cài đặt</button>
+                        <button class="btn btn-outline-danger" style="width: 105px">Đăng xuất</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-dark" type="button" style="width: 105px" data-toggle="modal" data-target="#userLoginModal">Đăng nhập</button>
+                        <button class="btn btn-outline-dark" type="button" style="width: 105px" data-toggle="modal" data-target="#registerLoginModal">Đăng ký</button>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -258,11 +274,20 @@
             </div>
         </div>
     </div>
+
+    @Html.Action("LoginModal", "User")
+    @Html.Action("RegisterModal", "User")
+    @if (Session["failed"] != null)
+    {
+        Session.Remove("failed");
+        @Html.Action("LoginFailed", "User")
+    }
+
     <script>
         $(document).ready(function () {
             // Lấy chiều cao của phần header
             var headerHeight = $("#banner").height();
-
+            $("#loginFailedModal").modal("show");
             // Sự kiện cuộn chuột
             $(window).scroll(function () {
                 // Nếu cuộn chuột xuống đến một độ cao lớn hơn chiều cao của header

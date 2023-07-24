@@ -27,10 +27,5 @@ namespace VuThanhDuong_DA.Controllers
             return PartialView();
         }
 
-        public ActionResult PaginationHandler()
-        {
-            return View();
-        }
-
     }
 }
