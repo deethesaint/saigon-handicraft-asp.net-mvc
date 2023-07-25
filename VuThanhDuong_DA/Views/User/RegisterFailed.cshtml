@@ -1,4 +1,4 @@
-﻿<div class="modal fade show" role="dialog" data-toggle="modal" id="loginFailedModal" aria-labelledby="loginFailedModalLabel" aria-hidden="true">
+﻿<div class="modal fade show" role="dialog" data-toggle="modal" id="registerFailedModal" aria-labelledby="registerFailedModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,13 +8,13 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <p class="text-danger">Thông tin đăng nhập không chính xác! Vui lòng kiểm tra lại.</p>
+                            <p class="text-danger">Đăng ký không thành công. @TempData["why"]</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#userLoginModal" data-dismiss="modal">Đăng nhập lại</button>
+                <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#userRegisterModal" data-dismiss="modal">Đăng ký lại</button>
                 <button class="btn btn-outline-danger" type="button" data-dismiss="modal">Thoát</button>
             </div>
         </div>

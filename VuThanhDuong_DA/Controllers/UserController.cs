@@ -29,7 +29,7 @@ namespace VuThanhDuong_DA.Controllers
                     return RedirectToAction("Index", "Home");
                 }    
             }
-            Session["failed"] = 1;
+            Session["LoginFailed"] = 1;
             return RedirectToAction("Index", "Home");
         }
 
@@ -50,12 +50,48 @@ namespace VuThanhDuong_DA.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterHandler()
+        public ActionResult RegisterHandler(user_account user)
         {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                if (dbContext.user_accounts.Any(u => u.user_username == user.user_username))
+                {
+                    Session["RegisterFailed"] = 1;
+                    TempData["why"] = "Đã tồn tại tên đăng nhập. Vui lòng chọn tên đăng nhập khác!";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    try
+                    {
+                        user.user_member_tier = "Đồng";
+                        user.user_point = 0;
+                        dbContext.user_accounts.InsertOnSubmit(user);
+                        dbContext.SubmitChanges();
+                        TempData["RegisterSucceed"] = 1;
+                    }
+                    catch (Exception e)
+                    {
+                        Session["RegisterFailed"] = 1;
+                        TempData["why"] = "Lỗi không xác định\n" + e.ToString();
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult LoginFailed()
+        {
+            return PartialView();
+        }
+
+        public ActionResult RegisterFailed()
+        {
+            return PartialView();
+        }
+
+        public ActionResult RegisterSuccessfully()
         {
             return PartialView();
         }

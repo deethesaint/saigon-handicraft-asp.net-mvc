@@ -1,10 +1,13 @@
-﻿<div class="modal fade" role="dialog" data-toggle="modal" id="registerLoginModal" aria-labelledby="registerLoginModalLabel" aria-hidden="true">
+﻿@using VuThanhDuong_DA.Models
+@model user_account
+
+<div class="modal fade" role="dialog" data-toggle="modal" id="userRegisterModal" aria-labelledby="userRegisterModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Đăng ký</h5>
             </div>
-            <form>
+            <form id="userRegisterForm" method="post" action="@Url.Action("RegisterHandler", "User")">
                 <div class="modal-body">
 
                     <div class="container-fluid">
@@ -31,15 +34,15 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-4 text-center">
-                                                <input id="gender1" name="user_gender" type="radio" value="Nam" />
+                                                @Html.RadioButtonFor(m => m.user_gender, "Nam", new { id = "gender1", name = "gender" })
                                                 <label class="form-check-label">Nam</label>
                                             </div>
                                             <div class="col-4 text-center">
-                                                <input id="gender2" name="user_gender" type="radio" value="Nữ" />
+                                                @Html.RadioButtonFor(m => m.user_gender, "Nam", new { id = "gender1", name = "gender" })
                                                 <label class="form-check-label">Nữ</label>
                                             </div>
                                             <div class="col-4 text-center">
-                                                <input id="gender3" name="user_gender" type="radio" value="Khác" />
+                                                @Html.RadioButtonFor(m => m.user_gender, "Nam", new { id = "gender1", name = "gender" })
                                                 <label class="form-check-label">Khác</label>
                                             </div>
                                         </div>
@@ -57,6 +60,11 @@
                                     <label>Số điện thoại</label>
                                     <input id="user_phonenumber" name="user_phonenumber" class="form-control" type="tel" />
                                     <p id="validPhone" class="text-danger" style="font-size: 14px">Vui lòng nhập số điện thoại</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input id="user_address" name="user_address" class="form-control" type="text" />
+                                    <p id="validAddress" class="text-danger" style="font-size: 14px">Vui lòng nhập địa chỉ</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Tên</label>

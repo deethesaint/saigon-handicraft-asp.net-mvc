@@ -192,6 +192,15 @@
     <Content Include="Views\User\RegisterModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\User\LoginFailed.cshtml" />
+    <Content Include="Views\User\LogOutModal.cshtml" />
+    <Content Include="Views\User\RegisterFailed.cshtml" />
+    <Content Include="Views\User\RegisterSuccessfully.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\SHSDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>SHSDB.designer.cs</LastGenOutput>
@@ -200,11 +209,6 @@
     <None Include="Models\SHSDB.dbml.layout">
       <DependentUpon>SHSDB.dbml</DependentUpon>
     </None>
-    <Content Include="Views\User\LoginFailed.cshtml" />
-    <Content Include="Views\User\LogOutModal.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

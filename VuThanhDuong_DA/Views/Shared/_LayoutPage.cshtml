@@ -136,7 +136,7 @@
                     else
                     {
                         <button class="btn btn-outline-dark" type="button" style="width: 105px" data-toggle="modal" data-target="#userLoginModal">Đăng nhập</button>
-                        <button class="btn btn-outline-dark" type="button" style="width: 105px" data-toggle="modal" data-target="#registerLoginModal">Đăng ký</button>
+                        <button class="btn btn-outline-dark" type="button" style="width: 105px" data-toggle="modal" data-target="#userRegisterModal">Đăng ký</button>
                     }
                 }
             </div>
@@ -278,10 +278,17 @@
     @Html.Action("LoginModal", "User")
     @Html.Action("RegisterModal", "User")
     @Html.Action("LogOutModal", "User")
-    @if (Session["failed"] != null)
+    @if (TempData["LoginFailed"] != null)
     {
-        Session.Remove("failed");
         @Html.Action("LoginFailed", "User")
+    }
+    @if (TempData["RegisterFailed"] != null)
+    {
+        @Html.Action("RegisterFailed", "User")
+    }
+    @if (TempData["RegisterSucceed"] != null)
+    {
+        @Html.Action("RegisterSuccessfully", "User")
     }
 
     <script>
@@ -289,6 +296,8 @@
             // Lấy chiều cao của phần header
             var headerHeight = $("#banner").height();
             $("#loginFailedModal").modal("show");
+            $("#registerFailedModal").modal("show");
+            $("#registerSucessfullyModal").modal("show");
             // Sự kiện cuộn chuột
             $(window).scroll(function () {
                 // Nếu cuộn chuột xuống đến một độ cao lớn hơn chiều cao của header
@@ -303,7 +312,23 @@
         });
     </script>
     <script>
+
         $(document).ready(function () {
+            $("#userRegisterModal").on("show.bs.modal", function () {
+                $("#validUsername").removeClass("invisible");
+                $("#validPassword").removeClass("invisible");
+                $("#validRepassword").removeClass("invisible");
+                $("#validEmail").removeClass("invisible");
+                $("#validPhone").removeClass("invisible");
+                $("#validFirst").removeClass("invisible");
+                $("#validLast").removeClass("invisible");
+                $("#validGender").removeClass("invisible");
+                $("#validAddress").removeClass("invisible");
+            });
+            $("#userLoginModal").on("show.bs.modal", function () {
+                $("#validLoginUsername").removeClass("invisible");
+                $("#validLoginPassword").removeClass("invisible");
+            });
             $("#user_username").keyup(function () {
                 if ($("#user_username").val() === "") {
                     $("#validUsername").removeClass("invisible");
@@ -353,14 +378,39 @@
                     $("#validLast").addClass("invisible");
                 }
             });
-            $("#gender1").click(function () {
-                $("#validGender").removeClass("invisible");
+            $("input[name='user_gender'").click(function () {
+                if ($("#gender1").is(":checked") || $("#gender2").is(":checked") || $("#gender3").is(":checked")) {
+                    $("#validGender").addClass("invisible");
+                } else {
+                    $("#validGender").removeClass("invisible");
+                }
             });
-            $("#gender2").click(function () {
-                $("#validGender").removeClass("invisible");
+            $("#user_address").keyup(function () {
+                if ($("#user_address").val() === "") {
+                    $("#validAddress").removeClass("invisible");
+                } else {
+                    $("#validAddress").addClass("invisible");
+                }
             });
-            $("#gender3").click(function () {
-                $("#validGender").removeClass("invisible");
+            $("#login_username").keyup(function () {
+                if ($("login_username").val() === "") {
+                    $("#validLoginUsername").removeClass("invisible");
+                } else {
+                    $("#validLoginUsername").addClass("invisible");
+                }
+            });
+            $("#login_password").keyup(function () {
+                if ($("login_password").val() === "") {
+                    $("#validLoginPassword").removeClass("invisible");
+                } else {
+                    $("#validLoginPassword").addClass("invisible");
+                }
+            });
+            $("#userRegisterModal").on("hide.bs.modal", function () {
+                $("#userRegisterForm").trigger("reset");
+            });
+            $("#userLoginModal").on("hide.bs.modal", function () {
+                $("#userLoginForm").trigger("reset");
             });
         });
     </script>

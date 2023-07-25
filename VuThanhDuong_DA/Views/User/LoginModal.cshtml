@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h5 class="modal-title">Đăng nhập</h5>
             </div>
-            <form action="@Url.Action("LoginHandler", "User")" method="post">
+            <form id="userLoginForm" action="@Url.Action("LoginHandler", "User")" method="post">
                 <div class="modal-body">
 
                     <div class="container-fluid">
@@ -15,11 +15,13 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Tên đăng nhập</label>
-                                    <input name="user_username" class="form-control" type="text" />
+                                    <input id="login_username" name="user_username" class="form-control" type="text" />
+                                    <p id="validLoginUsername" class="text-danger">Vui lòng nhập tên đăng nhập</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Mật khẩu</label>
-                                    <input name="user_password" class="form-control" type="password" />
+                                    <input id="login_password" name="user_password" class="form-control" type="password" />
+                                    <p id="validLoginPassword" class="text-danger">Vui lòng nhập mật khẩu</p>
                                 </div>
                                 <div class="form-group form-check">
                                     <input class="form-check-input" type="checkbox" />

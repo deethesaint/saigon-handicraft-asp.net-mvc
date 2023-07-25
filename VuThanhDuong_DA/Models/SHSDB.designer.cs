@@ -33,6 +33,9 @@ namespace VuThanhDuong_DA.Models
     partial void Insertadmin_account(admin_account instance);
     partial void Updateadmin_account(admin_account instance);
     partial void Deleteadmin_account(admin_account instance);
+    partial void Insertuser_order_product(user_order_product instance);
+    partial void Updateuser_order_product(user_order_product instance);
+    partial void Deleteuser_order_product(user_order_product instance);
     partial void Insertdiscount_event(discount_event instance);
     partial void Updatediscount_event(discount_event instance);
     partial void Deletediscount_event(discount_event instance);
@@ -51,9 +54,6 @@ namespace VuThanhDuong_DA.Models
     partial void Insertuser_order(user_order instance);
     partial void Updateuser_order(user_order instance);
     partial void Deleteuser_order(user_order instance);
-    partial void Insertuser_order_product(user_order_product instance);
-    partial void Updateuser_order_product(user_order_product instance);
-    partial void Deleteuser_order_product(user_order_product instance);
     #endregion
 		
 		public SHSDBDataContext() : 
@@ -91,6 +91,14 @@ namespace VuThanhDuong_DA.Models
 			get
 			{
 				return this.GetTable<admin_account>();
+			}
+		}
+		
+		public System.Data.Linq.Table<user_order_product> user_order_products
+		{
+			get
+			{
+				return this.GetTable<user_order_product>();
 			}
 		}
 		
@@ -139,14 +147,6 @@ namespace VuThanhDuong_DA.Models
 			get
 			{
 				return this.GetTable<user_order>();
-			}
-		}
-		
-		public System.Data.Linq.Table<user_order_product> user_order_products
-		{
-			get
-			{
-				return this.GetTable<user_order_product>();
 			}
 		}
 	}
@@ -236,6 +236,174 @@ namespace VuThanhDuong_DA.Models
 					this._admin_password = value;
 					this.SendPropertyChanged("admin_password");
 					this.Onadmin_passwordChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.user_order_product")]
+	public partial class user_order_product : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _user_order_id;
+		
+		private int _product_id;
+		
+		private EntityRef<product> _product;
+		
+		private EntityRef<user_order> _user_order;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_order_idChanging(int value);
+    partial void Onuser_order_idChanged();
+    partial void Onproduct_idChanging(int value);
+    partial void Onproduct_idChanged();
+    #endregion
+		
+		public user_order_product()
+		{
+			this._product = default(EntityRef<product>);
+			this._user_order = default(EntityRef<user_order>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int user_order_id
+		{
+			get
+			{
+				return this._user_order_id;
+			}
+			set
+			{
+				if ((this._user_order_id != value))
+				{
+					if (this._user_order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_order_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_order_id = value;
+					this.SendPropertyChanged("user_order_id");
+					this.Onuser_order_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_user_order_product", Storage="_product", ThisKey="product_id", OtherKey="product_id", IsForeignKey=true)]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.user_order_products.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.user_order_products.Add(this);
+						this._product_id = value.product_id;
+					}
+					else
+					{
+						this._product_id = default(int);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_order_user_order_product", Storage="_user_order", ThisKey="user_order_id", OtherKey="user_order_id", IsForeignKey=true)]
+		public user_order user_order
+		{
+			get
+			{
+				return this._user_order.Entity;
+			}
+			set
+			{
+				user_order previousValue = this._user_order.Entity;
+				if (((previousValue != value) 
+							|| (this._user_order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user_order.Entity = null;
+						previousValue.user_order_products.Remove(this);
+					}
+					this._user_order.Entity = value;
+					if ((value != null))
+					{
+						value.user_order_products.Add(this);
+						this._user_order_id = value.user_order_id;
+					}
+					else
+					{
+						this._user_order_id = default(int);
+					}
+					this.SendPropertyChanged("user_order");
 				}
 			}
 		}
@@ -488,9 +656,9 @@ namespace VuThanhDuong_DA.Models
 		
 		private System.Nullable<int> _product_inventory;
 		
-		private EntitySet<product_image> _product_images;
-		
 		private EntitySet<user_order_product> _user_order_products;
+		
+		private EntitySet<product_image> _product_images;
 		
 		private EntityRef<product_category> _product_category;
 		
@@ -524,8 +692,8 @@ namespace VuThanhDuong_DA.Models
 		
 		public product()
 		{
-			this._product_images = new EntitySet<product_image>(new Action<product_image>(this.attach_product_images), new Action<product_image>(this.detach_product_images));
 			this._user_order_products = new EntitySet<user_order_product>(new Action<user_order_product>(this.attach_user_order_products), new Action<user_order_product>(this.detach_user_order_products));
+			this._product_images = new EntitySet<product_image>(new Action<product_image>(this.attach_product_images), new Action<product_image>(this.detach_product_images));
 			this._product_category = default(EntityRef<product_category>);
 			OnCreated();
 		}
@@ -754,19 +922,6 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_product_image", Storage="_product_images", ThisKey="product_id", OtherKey="product_id")]
-		public EntitySet<product_image> product_images
-		{
-			get
-			{
-				return this._product_images;
-			}
-			set
-			{
-				this._product_images.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_user_order_product", Storage="_user_order_products", ThisKey="product_id", OtherKey="product_id")]
 		public EntitySet<user_order_product> user_order_products
 		{
@@ -777,6 +932,19 @@ namespace VuThanhDuong_DA.Models
 			set
 			{
 				this._user_order_products.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_product_image", Storage="_product_images", ThisKey="product_id", OtherKey="product_id")]
+		public EntitySet<product_image> product_images
+		{
+			get
+			{
+				return this._product_images;
+			}
+			set
+			{
+				this._product_images.Assign(value);
 			}
 		}
 		
@@ -834,18 +1002,6 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
-		private void attach_product_images(product_image entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = this;
-		}
-		
-		private void detach_product_images(product_image entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = null;
-		}
-		
 		private void attach_user_order_products(user_order_product entity)
 		{
 			this.SendPropertyChanging();
@@ -853,6 +1009,18 @@ namespace VuThanhDuong_DA.Models
 		}
 		
 		private void detach_user_order_products(user_order_product entity)
+		{
+			this.SendPropertyChanging();
+			entity.product = null;
+		}
+		
+		private void attach_product_images(product_image entity)
+		{
+			this.SendPropertyChanging();
+			entity.product = this;
+		}
+		
+		private void detach_product_images(product_image entity)
 		{
 			this.SendPropertyChanging();
 			entity.product = null;
@@ -1188,6 +1356,8 @@ namespace VuThanhDuong_DA.Models
 		
 		private string _user_password;
 		
+		private string _user_gender;
+		
 		private string _user_email;
 		
 		private string _user_phonenumber;
@@ -1214,6 +1384,8 @@ namespace VuThanhDuong_DA.Models
     partial void Onuser_usernameChanged();
     partial void Onuser_passwordChanging(string value);
     partial void Onuser_passwordChanged();
+    partial void Onuser_genderChanging(string value);
+    partial void Onuser_genderChanged();
     partial void Onuser_emailChanging(string value);
     partial void Onuser_emailChanged();
     partial void Onuser_phonenumberChanging(string value);
@@ -1292,6 +1464,26 @@ namespace VuThanhDuong_DA.Models
 					this._user_password = value;
 					this.SendPropertyChanged("user_password");
 					this.Onuser_passwordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_gender", DbType="NVarChar(10)")]
+		public string user_gender
+		{
+			get
+			{
+				return this._user_gender;
+			}
+			set
+			{
+				if ((this._user_gender != value))
+				{
+					this.Onuser_genderChanging(value);
+					this.SendPropertyChanging();
+					this._user_gender = value;
+					this.SendPropertyChanged("user_gender");
+					this.Onuser_genderChanged();
 				}
 			}
 		}
@@ -1706,174 +1898,6 @@ namespace VuThanhDuong_DA.Models
 		{
 			this.SendPropertyChanging();
 			entity.user_order = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.user_order_product")]
-	public partial class user_order_product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _user_order_id;
-		
-		private int _product_id;
-		
-		private EntityRef<product> _product;
-		
-		private EntityRef<user_order> _user_order;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_order_idChanging(int value);
-    partial void Onuser_order_idChanged();
-    partial void Onproduct_idChanging(int value);
-    partial void Onproduct_idChanged();
-    #endregion
-		
-		public user_order_product()
-		{
-			this._product = default(EntityRef<product>);
-			this._user_order = default(EntityRef<user_order>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int user_order_id
-		{
-			get
-			{
-				return this._user_order_id;
-			}
-			set
-			{
-				if ((this._user_order_id != value))
-				{
-					if (this._user_order.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_order_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_order_id = value;
-					this.SendPropertyChanged("user_order_id");
-					this.Onuser_order_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int product_id
-		{
-			get
-			{
-				return this._product_id;
-			}
-			set
-			{
-				if ((this._product_id != value))
-				{
-					if (this._product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_idChanging(value);
-					this.SendPropertyChanging();
-					this._product_id = value;
-					this.SendPropertyChanged("product_id");
-					this.Onproduct_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_user_order_product", Storage="_product", ThisKey="product_id", OtherKey="product_id", IsForeignKey=true)]
-		public product product
-		{
-			get
-			{
-				return this._product.Entity;
-			}
-			set
-			{
-				product previousValue = this._product.Entity;
-				if (((previousValue != value) 
-							|| (this._product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product.Entity = null;
-						previousValue.user_order_products.Remove(this);
-					}
-					this._product.Entity = value;
-					if ((value != null))
-					{
-						value.user_order_products.Add(this);
-						this._product_id = value.product_id;
-					}
-					else
-					{
-						this._product_id = default(int);
-					}
-					this.SendPropertyChanged("product");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_order_user_order_product", Storage="_user_order", ThisKey="user_order_id", OtherKey="user_order_id", IsForeignKey=true)]
-		public user_order user_order
-		{
-			get
-			{
-				return this._user_order.Entity;
-			}
-			set
-			{
-				user_order previousValue = this._user_order.Entity;
-				if (((previousValue != value) 
-							|| (this._user_order.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._user_order.Entity = null;
-						previousValue.user_order_products.Remove(this);
-					}
-					this._user_order.Entity = value;
-					if ((value != null))
-					{
-						value.user_order_products.Add(this);
-						this._user_order_id = value.user_order_id;
-					}
-					else
-					{
-						this._user_order_id = default(int);
-					}
-					this.SendPropertyChanged("user_order");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }
