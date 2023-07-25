@@ -131,7 +131,7 @@
                         <p class="font-weight-normal m-0 mr-2 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
                         <button class="btn btn-outline-info" style="width: 105px"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</button>
                         <button class="btn btn-outline-primary" style="width: 105px">Cài đặt</button>
-                        <button class="btn btn-outline-danger" style="width: 105px">Đăng xuất</button>
+                        <button class="btn btn-outline-danger" style="width: 105px" type="button" data-toggle="modal" data-target="#logOutModal">Đăng xuất</button>
                     }
                     else
                     {
@@ -277,6 +277,7 @@
 
     @Html.Action("LoginModal", "User")
     @Html.Action("RegisterModal", "User")
+    @Html.Action("LogOutModal", "User")
     @if (Session["failed"] != null)
     {
         Session.Remove("failed");
@@ -298,6 +299,68 @@
                     // Xóa class 'fixed-top' khỏi menu điều hướng
                     $("#mainNav").removeClass("fixed-top");
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#user_username").keyup(function () {
+                if ($("#user_username").val() === "") {
+                    $("#validUsername").removeClass("invisible");
+                } else {
+                    $("#validUsername").addClass("invisible");
+                }
+            });
+            $("#user_password").keyup(function () {
+                if ($("#user_password").val() === "") {
+                    $("#validPassword").removeClass("invisible");
+                } else {
+                    $("#validPassword").addClass("invisible");
+                }
+            });
+            $("#user_repassword").keyup(function () {
+                if ($("#user_repassword").val() === "") {
+                    $("#validRepassword").removeClass("invisible");
+                } else {
+                    $("#validRepassword").addClass("invisible");
+                }
+            });
+            $("#user_email").keyup(function () {
+                if ($("#user_email").val() === "") {
+                    $("#validEmail").removeClass("invisible");
+                } else {
+                    $("#validEmail").addClass("invisible");
+                }
+            });
+            $("#user_phonenumber").keyup(function () {
+                if ($("#user_phonenumber").val() === "") {
+                    $("#validPhone").removeClass("invisible");
+                } else {
+                    $("#validPhone").addClass("invisible");
+                }
+            });
+            $("#user_firstname").keyup(function () {
+                if ($("#user_firstname").val() === "") {
+                    $("#validFirst").removeClass("invisible");
+                } else {
+                    $("#validFirst").addClass("invisible");
+                }
+            });
+            $("#user_lastname").keyup(function () {
+                if ($("#user_lastname").val() === "") {
+                    $("#validLast").removeClass("invisible");
+                } else {
+                    $("#validLast").addClass("invisible");
+                }
+            });
+            $("#gender1").click(function () {
+                $("#validGender").removeClass("invisible");
+            });
+            $("#gender2").click(function () {
+                $("#validGender").removeClass("invisible");
+            });
+            $("#gender3").click(function () {
+                $("#validGender").removeClass("invisible");
             });
         });
     </script>

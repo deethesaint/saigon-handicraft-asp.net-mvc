@@ -33,6 +33,17 @@ namespace VuThanhDuong_DA.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult LogOut()
+        {
+            Session.Remove("currentUser");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult LogOutModal()
+        {
+            return PartialView();
+        }
+
         public ActionResult RegisterModal()
         {
             return PartialView();
