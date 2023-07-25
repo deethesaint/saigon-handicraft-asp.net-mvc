@@ -73,7 +73,7 @@ namespace VuThanhDuong_DA.Controllers
                     catch (Exception e)
                     {
                         Session["RegisterFailed"] = 1;
-                        TempData["why"] = "Lỗi không xác định\n" + e.ToString();
+                        TempData["why"] = "Lỗi không xác định\nError Information: " + e.ToString();
                         return RedirectToAction("Index", "Home");
                     }
                 }
