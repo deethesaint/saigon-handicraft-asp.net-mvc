@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@using VuThanhDuong_DA.Models
+@model product
+
+@if (Model != null)
+{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    <div class="container-fluid m-3 mt-3">
+        <div class="row">
+            <div class="col-1 p-0">
+                <ul id="imagelist" class="nav flex-column">
+                    @{ 
+                        if (ViewBag.images != null)
+                        {
+                            List<product_image> im = ViewBag.images as List<product_image>;
+                            foreach(var i in im)
+                            {
+                                <li class="nav-item mt-1">
+                                    <img id="@i.product_image_file_name" class="img-fluid m-0" src="~/Images/@i.product_image_file_name"/>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="col-6">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <img id="imagecurrent" class="img-fluid" src="~/Images/@Model.product_thumbnail_image" style="width: 100%; height: 100%"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h3>@Model.product_name</h3>
+                        <p>@Model.product_description</p>
+                    </div>
+                    <div class="row">
+                        <h3 class="text-danger">@String.Format(info, "{0:C0}", Model.product_price)</h3>
+                    </div>
+                    <div class="row">
+                        <h6>Tình trạng: 
+                        @{ 
+                            if (Model.product_inventory > 0)
+                            {
+                                <span class="text-success">Còn hàng</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Hết hàng</span>
+                            }
+                        }
+                        </h6>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            @{
+                                if (Model.product_inventory > 0)
+                                {
+                                    <a class="btn-lg btn-warning" href="#">ĐẶT HÀNG NGAY</a>
+                                }
+                                else
+                                {
+                                    <a class="btn-lg btn-warning" href="#">LIÊN HỆ TÔI KHI CÓ HÀNG</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using VuThanhDuong_DA.Models;
+@model List<product>
+
+<div class="container-fluid mt-3 pb-3">
+    <div class="row pl-2">
+        @{
+            var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+            if (Model != null)
+            {
+                foreach (var p in Model)
+                {
+                    <a href="~/Product/Details/?id=@p.product_id">
+                        <div class="card m-1" style="width: 24%">
+                            <div class="card-body">
+                                <img class="card-img" src="~/Images/@p.product_thumbnail_image" />
+                            </div>
+                            <div class="card-footer text-center">
+                                <p class="card-subtitle font-weight-bold">
+                                    @p.product_name
+                                </p>
+                                <p class="card-subtitle font-weight-bold mt-1 text-danger">
+                                    <span class="text-dark">Giá:</span> @String.Format(info, "{0:C0}", p.product_price)
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        }
+    </div>
+</div>

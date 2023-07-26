@@ -1,4 +1,5 @@
 ﻿@using VuThanhDuong_DA.Models
+@using MvcSiteMapProvider.Web.Html
 
 <!DOCTYPE html>
 
@@ -7,10 +8,17 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Contents/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/d60cfc64c3.js" crossorigin="anonymous"></script>
+    <link href="~/fontawesome-free-kit/css/all.min.css" rel="stylesheet" />
+    <script src="~/fontawesome-free-kit/js/all.min.js"></script>
     <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <style>
+        .breadcrumb a {
+            color: darkslategrey;
+        }
+    </style>
 </head>
+
 <body>
     <div id="banner" class="container-fluid">
         <div class="row">
@@ -66,12 +74,12 @@
             <div class="col-12 p-0">
                 <ul class="nav navbar bg-light navbar-light">
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold text-dark" href="#">
+                        <a class="nav-link font-weight-bold text-dark" href="~/Home/Index">
                             <i class="fa-solid fa-house"></i> Trang chủ
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold text-dark" href="#">
+                        <a class="nav-link font-weight-bold text-dark" href="~/Home/About">
                             <i class="fa-solid fa-compass"></i>
                             Giới thiệu
                         </a>
@@ -83,34 +91,26 @@
                                 Sản phẩm
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnDropdown">
-                                <a class="dropdown-item font-weight-bold" href="#">
-                                    item1
-                                </a>
-                                <a class="dropdown-item font-weight-bold" href="#">
-                                    item2
-                                </a>
-                                <a class="dropdown-item font-weight-bold" href="#">
-                                    item3
-                                </a>
+                                @Html.Action("Dropdown", "Home")
                             </div>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold text-dark" href="#">
+                        <a class="nav-link font-weight-bold text-dark" href="~/Home/Instruction">
                             <i class="fa-solid fa-chalkboard-user"></i>
                             Hướng dẫn mua hàng
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold text-dark" href="#">
+                        <a class="nav-link font-weight-bold text-dark" href="~/Home/Contact">
                             <i class="fa-solid fa-phone"></i>
                             Liên hệ
                         </a>
                     </li>
                     <li class="nav-item">
                         <div class="container-fluid">
-                            <form class="d-flex">
-                                <input class="form-control mr-2" placeholder="Tìm kiếm sản phẩm" type="text" />
+                            <form class="d-flex" method="post" action="~/Product/Search">
+                                <input name="searchtx" class="form-control mr-2" placeholder="Tìm kiếm sản phẩm" type="text" />
                                 <input class="btn btn-outline-dark" type="submit" value="Search" />
                             </form>
                         </div>
@@ -148,7 +148,14 @@
 
             </div>
             <div class="col-11 pl-0">
-                @Html.Action("Breadcrumb", "Home")
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        @*{
+                            Html.MvcSiteMap().SiteMap.CurrentNode.Title
+                        }*@
+                        @Html.MvcSiteMap().SiteMapPath()
+                    </ol>
+                </nav>
             </div>
         </div>
         <div class="row">

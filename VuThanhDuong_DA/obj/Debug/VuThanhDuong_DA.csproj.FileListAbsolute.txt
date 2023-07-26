@@ -28,3 +28,9 @@ C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\obj\Debug\VuThanhDuo
 C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\obj\Debug\VuThanhDuong_DA.csproj.CopyComplete
 C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\obj\Debug\VuThanhDuong_DA.dll
 C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\obj\Debug\VuThanhDuong_DA.pdb
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\MvcSiteMapProvider.dll
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\MvcSiteMapProvider.WebActivator.dll
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\WebActivatorEx.dll
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\MvcSiteMapProvider.xml
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\MvcSiteMapProvider.WebActivator.pdb
+C:\Users\Admin\Downloads\VuThanhDuong_Buoi3\VuThanhDuong_DA\bin\MvcSiteMapProvider.WebActivator.xml

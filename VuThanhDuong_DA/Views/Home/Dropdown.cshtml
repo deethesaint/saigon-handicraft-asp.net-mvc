@@ -1,0 +1,14 @@
+﻿@using VuThanhDuong_DA.Models;
+@model List<product_category>
+
+@{
+    if (Model != null)
+    {
+        foreach (var pc in Model)
+        {
+            <a class="dropdown-item font-weight-bold" href="~/Product/Category/?id=@pc.product_category_id">
+                @pc.product_category_name
+            </a>
+        }
+    }
+}

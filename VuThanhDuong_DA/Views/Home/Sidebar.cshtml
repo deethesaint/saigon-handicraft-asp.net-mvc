@@ -1,28 +1,25 @@
-﻿<div class="container-fluid bg-light rounded border">
+﻿@using VuThanhDuong_DA.Models;
+@model List<product_category>
+
+<div class="container-fluid bg-light rounded border">
     <ul class="nav flex-column">
         <li class="nav-tabs text-center font-weight-bold">
             DANH MỤC SẢN PHẨM
         </li>
-        <li class="nav-tabs">
-            <a class="nav-link text-dark" href="#">
-                Sản phẩm 1
-            </a>
-        </li>
-        <li class="nav-tabs">
-            <a class="nav-link text-dark" href="#">
-                Sản phẩm 2
-            </a>
-        </li>
-        <li class="nav-tabs">
-            <a class="nav-link text-dark" href="#">
-                Sản phẩm 3
-            </a>
-        </li>
-        <li class="nav-tabs">
-            <a class="nav-link text-dark" href="#">
-                Sản phẩm 4
-            </a>
-        </li>
+        @{
+            if (Model != null)
+            {
+                foreach (var pc in Model)
+                {
+                    <li class="nav-tabs">
+                        <a class="nav-link text-dark" href="~/Product/Category/?id=@pc.product_category_id">
+                            @pc.product_category_name
+                        </a>
+                    </li>
+                }
+            }
+        }
+
     </ul>
 </div>
 <div class="container-fluid bg-light rounded mt-3 mb-3 border">

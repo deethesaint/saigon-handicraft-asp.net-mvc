@@ -29,7 +29,7 @@ namespace VuThanhDuong_DA.Controllers
                     return RedirectToAction("Index", "Home");
                 }    
             }
-            Session["LoginFailed"] = 1;
+            TempData["LoginFailed"] = 1;
             return RedirectToAction("Index", "Home");
         }
 
@@ -56,7 +56,7 @@ namespace VuThanhDuong_DA.Controllers
             {
                 if (dbContext.user_accounts.Any(u => u.user_username == user.user_username))
                 {
-                    Session["RegisterFailed"] = 1;
+                    TempData["RegisterFailed"] = 1;
                     TempData["why"] = "Đã tồn tại tên đăng nhập. Vui lòng chọn tên đăng nhập khác!";
                     return RedirectToAction("Index", "Home");
                 }
@@ -72,7 +72,7 @@ namespace VuThanhDuong_DA.Controllers
                     }
                     catch (Exception e)
                     {
-                        Session["RegisterFailed"] = 1;
+                        TempData["RegisterFailed"] = 1;
                         TempData["why"] = "Lỗi không xác định\nError Information: " + e.ToString();
                         return RedirectToAction("Index", "Home");
                     }
