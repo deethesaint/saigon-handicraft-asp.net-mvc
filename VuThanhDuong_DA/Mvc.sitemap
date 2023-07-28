@@ -10,5 +10,8 @@
 	  <mvcSiteMapNode title="Sản phẩm" controller="Product" action="All">
 		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details"/>
 	  </mvcSiteMapNode>
+	  <mvcSiteMapNode title="Danh mục sản phẩm" controller="Product" action="Category">
+		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details"/>
+	  </mvcSiteMapNode>
   </mvcSiteMapNode>
 </mvcSiteMap>

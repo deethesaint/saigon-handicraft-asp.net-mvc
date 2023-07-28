@@ -66,7 +66,7 @@
                             @{
                                 if (Model.product_inventory > 0)
                                 {
-                                    <a class="btn-lg btn-warning" href="#">THÊM VÀO GIỎ HÀNG</a>
+                                    <a class="btn-lg btn-warning" href="~/Cart/AddProductIntoCart/?id=@Model.product_id&url=@Request.Url.ToString()">THÊM VÀO GIỎ HÀNG</a>
                                 }
                                 else
                                 {

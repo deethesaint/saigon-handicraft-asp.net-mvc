@@ -129,7 +129,7 @@
                     {
                         user_account user = Session["currentUser"] as user_account;
                         <p class="font-weight-normal m-0 mr-2 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
-                        <button class="btn btn-outline-info" style="width: 105px"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</button>
+                        <a class="btn btn-outline-info" style="width: 105px" href="~/Cart/Index"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
                         <button class="btn btn-outline-primary" style="width: 105px">Cài đặt</button>
                         <button class="btn btn-outline-danger" style="width: 105px" type="button" data-toggle="modal" data-target="#logOutModal">Đăng xuất</button>
                     }
