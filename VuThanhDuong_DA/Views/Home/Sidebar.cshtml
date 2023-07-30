@@ -1,9 +1,9 @@
 ﻿@using VuThanhDuong_DA.Models;
 @model List<product_category>
 
-<div class="container-fluid bg-light rounded border">
-    <ul class="nav flex-column">
-        <li class="nav-tabs text-center font-weight-bold">
+<div class="container-fluid bg-light rounded border p-0">
+    <ul class="list-group">
+        <li class="list-group-item text-center font-weight-bold">
             DANH MỤC SẢN PHẨM
         </li>
         @{
@@ -11,8 +11,8 @@
             {
                 foreach (var pc in Model)
                 {
-                    <li class="nav-tabs">
-                        <a class="nav-link text-dark" href="~/Product/Category/?id=@pc.product_category_id">
+                    <li class="list-group-item">
+                        <a class="text-dark" href="~/Product/Category/?id=@pc.product_category_id">
                             @pc.product_category_name
                         </a>
                     </li>
@@ -22,12 +22,12 @@
 
     </ul>
 </div>
-<div class="container-fluid bg-light rounded mt-3 mb-3 border">
-    <ul class="nav flex-column">
-        <li class="nav-tabs text-center font-weight-bold">
+<div class="container-fluid bg-light rounded mt-3 mb-3 border p-0">
+    <ul class="list-group flex-column">
+        <li class="list-group-item text-center font-weight-bold">
             LIÊN HỆ CHÚNG TÔI
         </li>
-        <li class="nav-tabs">
+        <li class="list-group-item">
             <span>
                 <i class="fa-solid fa-phone"></i> Hotline: <br /> 0366035415 <br />
             </span>

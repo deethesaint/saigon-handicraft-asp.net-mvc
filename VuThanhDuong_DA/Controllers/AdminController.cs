@@ -14,12 +14,45 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult Index()
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
             return View();
+        }
+
+        public ActionResult Sidebar()
+        {
+            return PartialView();
         }
 
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(admin_account ac)
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                admin_account current_ac = dbContext.admin_accounts.SingleOrDefault(aci => aci.admin_username == ac.admin_username && aci.admin_password == ac.admin_password);
+                if (current_ac == null)
+                {
+                    TempData["admin_failed"] = 1;
+                    return View();
+                }
+                else
+                {
+                    Session["admin"] = current_ac;
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+        }
+
+        public ActionResult LoginFailed()
+        {
+            return PartialView();
         }
 
         public ActionResult Edit()
@@ -89,6 +122,16 @@ namespace VuThanhDuong_DA.Controllers
         }
 
         public ActionResult UserDelete()
+        {
+            return View();
+        }
+
+        public ActionResult OrderProcess()
+        {
+            return View();
+        }
+
+        public ActionResult OrderSucceed()
         {
             return View();
         }

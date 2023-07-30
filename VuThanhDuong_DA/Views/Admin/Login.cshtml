@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+@using VuThanhDuong_DA.Models
+@model admin_account
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-9">
+            <form method="post" action="~/Admin/Login">
+                <div class="form-group">
+                    <label>Admin username</label>
+                    <input name="admin_username" class="form-control" type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Admin password</label>
+                    <input name="admin_password" class="form-control" type="password" required />
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-outline-success" type="submit" value="Login"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["admin_failed"] != null)
+{
+    @Html.Action("LoginFailed", "Admin")
+}

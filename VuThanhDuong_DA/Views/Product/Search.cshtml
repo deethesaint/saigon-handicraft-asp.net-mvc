@@ -15,10 +15,8 @@
                 foreach (var p in Model)
                 {
                     <a href="~/Product/Details/?id=@p.product_id">
-                        <div class="card m-1" style="width: 24%">
-                            <div class="card-body">
-                                <img class="card-img" src="~/Images/@p.product_thumbnail_image" />
-                            </div>
+                        <div class="card m-1">
+                            <img class="card-img-top img-fluid" src="~/Images/@p.product_thumbnail_image" style="width: 250px; height: 170px" />
                             <div class="card-footer text-center">
                                 <p class="card-subtitle font-weight-bold">
                                     @p.product_name

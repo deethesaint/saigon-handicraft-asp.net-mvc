@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcSiteMapProvider.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,8 @@ namespace VuThanhDuong_DA.Controllers
         {
             using (var dbContext = new SHSDBDataContext())
             {
+                ViewBag.categoryTitle = dbContext.product_categories.SingleOrDefault(pc => pc.product_category_id == id).product_category_name;
+                ViewBag.categoryDescription = dbContext.product_categories.SingleOrDefault(pc => pc.product_category_id == id).product_category_description;
                 return View(dbContext.products.Where(p => p.product_category_id == id).ToList());
             }
         }

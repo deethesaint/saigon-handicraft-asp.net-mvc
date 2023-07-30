@@ -128,7 +128,9 @@
                     if (Session["currentUser"] != null)
                     {
                         user_account user = Session["currentUser"] as user_account;
-                        <p class="font-weight-normal m-0 mr-2 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
+                        <p class="font-weight-normal m-0 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
+                        <p class="font-weight-normal m-0 mr-2 d-inline">| Điểm tích lũy: @user.user_point</p>
+                        <a class="btn btn-outline-warning" style="width: 105px" href="#!">Đơn hàng</a>
                         <a class="btn btn-outline-info" style="width: 105px" href="~/Cart/Index"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
                         <button class="btn btn-outline-primary" style="width: 105px">Cài đặt</button>
                         <button class="btn btn-outline-danger" style="width: 105px" type="button" data-toggle="modal" data-target="#logOutModal">Đăng xuất</button>
@@ -423,4 +425,3 @@
     </script>
 </body>
 </html>
-

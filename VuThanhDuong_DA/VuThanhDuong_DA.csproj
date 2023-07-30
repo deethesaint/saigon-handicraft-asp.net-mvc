@@ -135,6 +135,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SHSDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserRanking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2205,6 +2206,11 @@
     <Content Include="fontawesome-free-kit\svgs\solid\yen-sign.svg" />
     <Content Include="fontawesome-free-kit\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome-free-kit\svgs\solid\z.svg" />
+    <Content Include="Images\2_i1.jpg" />
+    <Content Include="Images\2_i2.jpg" />
+    <Content Include="Images\2_i3.jpg" />
+    <Content Include="Images\2_i4.jpg" />
+    <Content Include="Images\2_i5.jpg" />
     <Content Include="Images\i1.jpg" />
     <Content Include="Images\i2.jpg" />
     <Content Include="Images\i3.jpg" />
@@ -2352,6 +2358,11 @@
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\Admin_LayoutPage.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\LoginFailed.cshtml" />
+    <Content Include="Views\Admin\Sidebar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

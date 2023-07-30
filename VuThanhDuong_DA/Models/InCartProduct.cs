@@ -10,6 +10,7 @@ namespace VuThanhDuong_DA.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string ImgFileName { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public int Amount { get; set; }
@@ -20,6 +21,7 @@ namespace VuThanhDuong_DA.Models
                 product prd = dbContext.products.SingleOrDefault(p => p.product_id == id);
                 Id = prd.product_id;
                 Name = prd.product_name;
+                ImgFileName = prd.product_thumbnail_image;
                 Price = (decimal)prd.product_price;
                 Discount = (decimal)prd.product_discount;
                 Amount = 1;
