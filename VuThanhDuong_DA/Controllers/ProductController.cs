@@ -56,7 +56,10 @@ namespace VuThanhDuong_DA.Controllers
         {
             using (var dbContext = new SHSDBDataContext())
             {
-                return View(dbContext.products.Where(p => p.product_name.Contains(Request["searchtx"].ToString()) == true).ToList());
+                ViewBag.search = Request["searchtx"];
+                List<product> products = dbContext.products.Where(p => p.product_name.Contains(Request["searchtx"].ToString()) == true).ToList();
+                ViewBag.searchAmount = products.Count;
+                return View(products);
             }
         }
     }

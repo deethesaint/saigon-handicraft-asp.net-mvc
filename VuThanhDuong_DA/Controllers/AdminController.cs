@@ -66,12 +66,21 @@ namespace VuThanhDuong_DA.Controllers
             return View();
         }
 
-        public ActionResult CategoryList()
+        public ActionResult CategoryList(string search_str = "")
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                return View(dbContext.product_categories.ToList());
+            }
+        }
+
+        public ActionResult CategoryCreate()
         {
             return View();
         }
 
-        public ActionResult CategoryCreate()
+        [HttpPost]
+        public ActionResult CategoryCreate(product_category pc)
         {
             return View();
         }

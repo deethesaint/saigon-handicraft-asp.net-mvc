@@ -7,6 +7,12 @@
 @model List<product>
 
 <div class="container-fluid mt-3 pb-3">
+    <div class="row-pl-2 mb-3 border-bottom">
+        <div class="col-12">
+            <h3>Kết quả tìm kiếm cho từ khóa "@ViewBag.search"</h3>
+            <p class="text-justify">Có @ViewBag.searchAmount kết quả.</p>
+        </div>
+    </div>
     <div class="row pl-2">
         @{
             var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");

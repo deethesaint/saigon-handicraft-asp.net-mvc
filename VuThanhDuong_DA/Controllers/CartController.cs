@@ -14,7 +14,14 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.sum = GetCart().Sum(pc => pc.Price * pc.Amount);
+            ViewBag.amount = GetCart().Sum(pc => pc.Amount);
             return View(GetCart());
+        }
+
+        public ActionResult OrderList()
+        {
+            return View();
         }
 
         public List<InCartProduct> GetCart()
@@ -38,6 +45,69 @@ namespace VuThanhDuong_DA.Controllers
             }
             Session["cart"] = products;
             return RedirectToAction("Details", "Product", new {ID = id});
+        }
+
+        [HttpPost]
+        public ActionResult ChangeProductAmount(FormCollection c)
+        {
+            List<InCartProduct> products = GetCart();
+            foreach(InCartProduct icp in products)
+            {
+                icp.Amount = int.Parse(Request[(icp.Id).ToString()]);
+            }
+            Session["cart"] = products;
+            return RedirectToAction("Index", "Cart");
+        }
+
+        public ActionResult DeleteProduct(int id)
+        {
+            List<InCartProduct> products = GetCart();
+            products.RemoveAll(product => product.Id == id);
+            Session["cart"] = products;
+            return RedirectToAction("Index", "Cart");
+        }
+
+        public ActionResult RequestOrder()
+        {
+            ViewBag.sum = GetCart().Sum(pc => pc.Price * pc.Amount);
+            ViewBag.amount = GetCart().Sum(pc => pc.Amount);
+            return View(GetCart());
+        }
+
+        [HttpPost]
+        public ActionResult SubmitOrder(FormCollection c)
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                if (GetCart().Count != 0)
+                {
+                    List<InCartProduct> products = GetCart();
+                    user_order uo = new user_order();
+                    if (Session["currentUser"] != null)
+                    {
+                        uo.user_account_id = (Session["currentUser"] as user_account).user_account_id;
+                    }
+                    uo.order_time = DateTime.Now;
+                    uo.is_processed = false;
+                    uo.is_delivered = false;
+                    uo.user_order_buyer_name = Request["Order_owner_name"];
+                    uo.user_order_address = Request["Order_owner_address"];
+                    uo.user_order_email = Request["Order_owner_email"];
+                    uo.user_order_phonenumber = Request["Order_owner_phone"];
+                    dbContext.user_orders.InsertOnSubmit(uo);
+                    dbContext.SubmitChanges();
+                    foreach (InCartProduct product in products)
+                    {
+                        user_order_product uop = new user_order_product();
+                        uop.product_id = product.Id;
+                        uop.user_order_id = uo.user_order_id;
+                        dbContext.user_order_products.InsertOnSubmit(uop);
+                    }
+                    dbContext.SubmitChanges();
+                    Session.Remove("cart");
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

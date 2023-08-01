@@ -1,0 +1,60 @@
+﻿@using VuThanhDuong_DA.Models
+@using System.Linq
+@model IEnumerable<VuThanhDuong_DA.Models.product_category>
+
+@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+
+<div class="container-fluid m-0 p-0">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h4>DANH SÁCH DANH MỤC SẢN PHẨM</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <table class="table">
+                    <thead class="bg-light text-center">
+                        <tr>
+                            <th>
+                                Mã danh mục
+                            </th>
+                            <th>
+                                Tên danh mục
+                            </th>
+                            <th>
+                                Số lượng sản phẩm
+                            </th>
+                            <th>
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.product_category_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product_category_name)
+                                </td>
+                                <td class="text-center">
+                                    
+                                </td>
+                                <td class="text-center">
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.product_category_id }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.product_category_id })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

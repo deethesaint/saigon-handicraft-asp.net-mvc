@@ -2234,6 +2234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2363,6 +2364,8 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\LoginFailed.cshtml" />
     <Content Include="Views\Admin\Sidebar.cshtml" />
+    <Content Include="Views\Admin\CategoryList.cshtml" />
+    <Content Include="Views\Cart\RequestOrder.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

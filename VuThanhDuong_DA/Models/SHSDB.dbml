@@ -81,8 +81,12 @@
       <Column Name="user_order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="user_account_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="order_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="user_order_buyer_name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="user_order_address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="user_order_email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="user_order_phonenumber" Type="System.String" DbType="Char(12)" CanBeNull="true" />
       <Column Name="is_processed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="is_submitted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="is_delivered" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="user_order_user_order_product" Member="user_order_products" ThisKey="user_order_id" OtherKey="user_order_id" Type="user_order_product" />
       <Association Name="user_account_user_order" Member="user_account" ThisKey="user_account_id" OtherKey="user_account_id" Type="user_account" IsForeignKey="true" />
     </Type>

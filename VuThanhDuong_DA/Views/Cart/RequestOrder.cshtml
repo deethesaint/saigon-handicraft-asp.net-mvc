@@ -1,12 +1,12 @@
-﻿@using VuThanhDuong_DA.Models;
-@model IEnumerable<VuThanhDuong_DA.Models.InCartProduct>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "RequestOrder";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<form method="post" action="~/Cart/ChangeProductAmount">
+@using VuThanhDuong_DA.Models;
+@model IEnumerable<VuThanhDuong_DA.Models.InCartProduct>
+
+<form method="post" action="~/Cart/SubmitOrder">
     @if (Model != null)
     {
         var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
@@ -19,7 +19,7 @@
                                 <thead>
                                     <tr class="text-center">
                                         <td colspan="7" class="text-center">
-                                            <h5>DANH SÁCH SẢN PHẨM TRONG GIỎ HÀNG</h5>
+                                            <h5>XÁC NHẬN ĐƠN HÀNG</h5>
                                         </td>
 
                                     </tr>
@@ -68,13 +68,10 @@
                                                     @String.Format(info, "{0:C0}", icp.Discount)
                                                 </td>
                                                 <td>
-                                                    <input min="1" name="@icp.Id" class="text-center w-25" type="number" value="@icp.Amount" />
+                                                    <input min="1" name="@icp.Id" class="text-center w-25" type="number" value="@icp.Amount" disabled />
                                                 </td>
                                                 <td>
                                                     @String.Format(info, "{0:C0}", ((icp.Price - icp.Discount) * icp.Amount));
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-danger" href="~/Cart/DeleteProduct/?id=@icp.Id">Xóa</a>
                                                 </td>
                                             </tr>
                                         }
@@ -87,33 +84,62 @@
             </div>
             <div class="row mt-1 pt-3 border-top">
                 <div class="col-7">
-
+                    <div class="form mt-0">
+                        @if (Session["currentUser"] != null)
+                        {
+                            <div class="form-group">
+                                <label>Họ và tên người mua</label>
+                                <input class="form-control" name="Order_owner_name" type="text" required value="@((Session["currentUser"] as user_account).user_lastname + " " + (Session["currentUser"] as user_account).user_firstname)"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input class="form-control" name="Order_owner_phone" type="text" required value="@((Session["currentUser"] as user_account).user_phonenumber)" minlength="10"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" name="Order_owner_email" type="email" value="@((Session["currentUser"] as user_account).user_email)"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ nhận hàng</label>
+                                <input class="form-control" name="Order_owner_address" required value="@((Session["currentUser"] as user_account).user_address)"/>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label>Họ và tên người mua</label>
+                                <input class="form-control" name="Order_owner_name" type="text" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input class="form-control" name="Order_owner_phone" type="text" required minlength="10"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" name="Order_owner_email" type="email" />
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ nhận hàng</label>
+                                <input class="form-control" name="Order_owner_address" required />
+                            </div>
+                        }
+                    </div>
                 </div>
                 <div class="col-5 d-inline">
                     <p>Tổng số lượng hàng: @ViewBag.amount</p>
                     <p>Tổng thành tiền: @String.Format(info, "{0:C0}", ViewBag.sum)</p>
+                    <input type="submit" class="btn btn-success" value="Xác nhận đơn hàng"/>
+                    <a class="btn btn-danger" href="~/Cart/Index">Hủy</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-7">
-
+                    
                 </div>
                 <div class="col-5 d-inline">
-                    <button class="btn btn-danger">Hủy giỏ hàng</button>
-                    <button id="editCart" class="btn btn-primary" type="submit">Cập nhật</button>
-                    <a id="submitCart" href="~/Cart/RequestOrder" class="btn btn-success">Tiến hành đặt hàng</a>
+                    
                 </div>
             </div>
         </div>
     }
 </form>
-@{ 
-    List<InCartProduct> products = Session["cart"] as List<InCartProduct>;
-    if (products == null || products.Count == 0)
-    {
-        <script>
-            $("#submitCart").addClass("disabled");
-            $("#editCart").prop('disabled', true);
-        </script>
-    }
-}

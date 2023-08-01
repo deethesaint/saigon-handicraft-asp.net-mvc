@@ -1686,9 +1686,17 @@ namespace VuThanhDuong_DA.Models
 		
 		private System.Nullable<System.DateTime> _order_time;
 		
+		private string _user_order_buyer_name;
+		
+		private string _user_order_address;
+		
+		private string _user_order_email;
+		
+		private string _user_order_phonenumber;
+		
 		private System.Nullable<bool> _is_processed;
 		
-		private System.Nullable<bool> _is_submitted;
+		private System.Nullable<bool> _is_delivered;
 		
 		private EntitySet<user_order_product> _user_order_products;
 		
@@ -1704,10 +1712,18 @@ namespace VuThanhDuong_DA.Models
     partial void Onuser_account_idChanged();
     partial void Onorder_timeChanging(System.Nullable<System.DateTime> value);
     partial void Onorder_timeChanged();
+    partial void Onuser_order_buyer_nameChanging(string value);
+    partial void Onuser_order_buyer_nameChanged();
+    partial void Onuser_order_addressChanging(string value);
+    partial void Onuser_order_addressChanged();
+    partial void Onuser_order_emailChanging(string value);
+    partial void Onuser_order_emailChanged();
+    partial void Onuser_order_phonenumberChanging(string value);
+    partial void Onuser_order_phonenumberChanged();
     partial void Onis_processedChanging(System.Nullable<bool> value);
     partial void Onis_processedChanged();
-    partial void Onis_submittedChanging(System.Nullable<bool> value);
-    partial void Onis_submittedChanged();
+    partial void Onis_deliveredChanging(System.Nullable<bool> value);
+    partial void Onis_deliveredChanged();
     #endregion
 		
 		public user_order()
@@ -1781,6 +1797,86 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_buyer_name", DbType="NVarChar(255)")]
+		public string user_order_buyer_name
+		{
+			get
+			{
+				return this._user_order_buyer_name;
+			}
+			set
+			{
+				if ((this._user_order_buyer_name != value))
+				{
+					this.Onuser_order_buyer_nameChanging(value);
+					this.SendPropertyChanging();
+					this._user_order_buyer_name = value;
+					this.SendPropertyChanged("user_order_buyer_name");
+					this.Onuser_order_buyer_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_address", DbType="NVarChar(255)")]
+		public string user_order_address
+		{
+			get
+			{
+				return this._user_order_address;
+			}
+			set
+			{
+				if ((this._user_order_address != value))
+				{
+					this.Onuser_order_addressChanging(value);
+					this.SendPropertyChanging();
+					this._user_order_address = value;
+					this.SendPropertyChanged("user_order_address");
+					this.Onuser_order_addressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_email", DbType="VarChar(255)")]
+		public string user_order_email
+		{
+			get
+			{
+				return this._user_order_email;
+			}
+			set
+			{
+				if ((this._user_order_email != value))
+				{
+					this.Onuser_order_emailChanging(value);
+					this.SendPropertyChanging();
+					this._user_order_email = value;
+					this.SendPropertyChanged("user_order_email");
+					this.Onuser_order_emailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_order_phonenumber", DbType="Char(12)")]
+		public string user_order_phonenumber
+		{
+			get
+			{
+				return this._user_order_phonenumber;
+			}
+			set
+			{
+				if ((this._user_order_phonenumber != value))
+				{
+					this.Onuser_order_phonenumberChanging(value);
+					this.SendPropertyChanging();
+					this._user_order_phonenumber = value;
+					this.SendPropertyChanged("user_order_phonenumber");
+					this.Onuser_order_phonenumberChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_is_processed", DbType="Bit")]
 		public System.Nullable<bool> is_processed
 		{
@@ -1801,22 +1897,22 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_is_submitted", DbType="Bit")]
-		public System.Nullable<bool> is_submitted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_is_delivered", DbType="Bit")]
+		public System.Nullable<bool> is_delivered
 		{
 			get
 			{
-				return this._is_submitted;
+				return this._is_delivered;
 			}
 			set
 			{
-				if ((this._is_submitted != value))
+				if ((this._is_delivered != value))
 				{
-					this.Onis_submittedChanging(value);
+					this.Onis_deliveredChanging(value);
 					this.SendPropertyChanging();
-					this._is_submitted = value;
-					this.SendPropertyChanged("is_submitted");
-					this.Onis_submittedChanged();
+					this._is_delivered = value;
+					this.SendPropertyChanged("is_delivered");
+					this.Onis_deliveredChanged();
 				}
 			}
 		}
