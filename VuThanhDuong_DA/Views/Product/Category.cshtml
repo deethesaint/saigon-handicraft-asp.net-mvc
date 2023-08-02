@@ -34,16 +34,24 @@
             foreach (var p in Model)
             {
                 <a href="~/Product/Details/?id=@p.product_id">
-                    <div class="card m-1">
-                        <img class="card-img-top img-fluid" src="~/Images/@p.product_thumbnail_image" style="width: 250px; height: 170px" />
+                    <div class="card m-1" style="width: 17vw">
+                        <img class="card-img-top img-fluid" src="~/Images/@p.product_thumbnail_image" style="width: 100vw; height: 170px" />
                         <div class="card-footer text-center">
-                            <p class="card-subtitle font-weight-bold">
+                            <p class="font-weight-bold text-truncate" style="width: 100%">
                                 @p.product_name
                             </p>
                             <p class="card-subtitle font-weight-bold mt-1 text-danger">
                                 <span class="text-dark">Giá:</span> @String.Format(info, "{0:C0}", p.product_price)
                             </p>
                         </div>
+                        @if (p.product_inventory == 0)
+                        {
+                            <span class="badge badge-danger" style="position: absolute; left: 0; top: 0">HẾT HÀNG</span>
+                        }
+                        else if (p.product_discount > 0)
+                        {
+                            <span class="badge badge-warning" style="position: absolute; left: 0; top: 0">GIẢM GIÁ</span>
+                        }
                     </div>
                 </a>
             }

@@ -16,7 +16,34 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("All", "Product");
+            return View();
+        }
+
+        public ActionResult New()
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                List<product> products = dbContext.products.OrderByDescending(p => p.product_id).ToList();
+                return PartialView(products.GetRange(0, 12));
+            }
+        }
+
+        public ActionResult MostPositive()
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                List<product> products = dbContext.products.OrderByDescending(p => p.product_review_positive).ToList();
+                return PartialView(products.GetRange(0, 12));
+            }
+        }
+
+        public ActionResult MostBought()
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                List<product> products = dbContext.products.OrderByDescending(p => p.product_bought_count).ToList();
+                return PartialView(products.GetRange(0, 12));
+            }
         }
 
         public ActionResult About()

@@ -2,23 +2,30 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
+
 <div class="container-fluid mt-3 pb-3">
+    <div class="row-pl-2 mb-3 border-bottom">
+        <div class="col-12 mt-2">
+            <h3>Sản phẩm mới nhất</h3>
+        </div>
+    </div>
     <div class="row pl-2">
-        @for (int i = 0; i < 17; ++i)
-        {
-            <div class="card m-1" style="width: 24%">
-                <div class="card-body">
-                    <img class="card-img" src="~/Images/sample.jpg" />
-                </div>
-                <div class="card-footer text-center">
-                    <p class="card-subtitle font-weight-bold">
-                        Sample Product
-                    </p>
-                    <p class="card-subtitle font-weight-bold mt-1 text-danger">
-                        Price: <del>990,000đ</del> 890,000đ
-                    </p>
-                </div>
-            </div>
-        }
+        @Html.Action("New", "Home")
+    </div>
+    <div class="row-pl-2 mb-3 border-bottom border-top">
+        <div class="col-12 mt-2">
+            <h3>Sản phẩm nhiều người mua nhất</h3>
+        </div>
+    </div>
+    <div class="row pl-2">
+        @Html.Action("MostPositive", "Home")
+    </div>
+    <div class="row-pl-2 mb-3 border-bottom border-top">
+        <div class="col-12 mt-2">
+            <h3>Sản phẩm được đánh giá cao nhất</h3>
+        </div>
+    </div>
+    <div class="row pl-2">
+        @Html.Action("MostBought", "Home")
     </div>
 </div>

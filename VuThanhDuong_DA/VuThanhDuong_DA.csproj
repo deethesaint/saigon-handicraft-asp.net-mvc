@@ -2371,6 +2371,9 @@
     <Content Include="Views\Cart\SubmitSucceed.cshtml" />
     <Content Include="Views\Admin\CategoryCreate.cshtml" />
     <Content Include="Views\Admin\ProductCreate.cshtml" />
+    <Content Include="Views\Home\New.cshtml" />
+    <Content Include="Views\Home\MostPositive.cshtml" />
+    <Content Include="Views\Home\MostBought.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
