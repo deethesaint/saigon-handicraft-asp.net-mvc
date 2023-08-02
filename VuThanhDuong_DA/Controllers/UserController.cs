@@ -95,5 +95,16 @@ namespace VuThanhDuong_DA.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(user_account ua)
+        {
+            return View();
+        }
     }
 }

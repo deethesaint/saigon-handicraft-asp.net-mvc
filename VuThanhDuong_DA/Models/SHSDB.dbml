@@ -11,6 +11,8 @@
     <Type Name="user_order_product">
       <Column Name="user_order_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="order_product_amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="product_user_order_product" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
       <Association Name="user_order_user_order_product" Member="user_order" ThisKey="user_order_id" OtherKey="user_order_id" Type="user_order" IsForeignKey="true" />
     </Type>
@@ -87,6 +89,7 @@
       <Column Name="user_order_phonenumber" Type="System.String" DbType="Char(12)" CanBeNull="true" />
       <Column Name="is_processed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="is_delivered" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="order_total_value" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Association Name="user_order_user_order_product" Member="user_order_products" ThisKey="user_order_id" OtherKey="user_order_id" Type="user_order_product" />
       <Association Name="user_account_user_order" Member="user_account" ThisKey="user_account_id" OtherKey="user_account_id" Type="user_account" IsForeignKey="true" />
     </Type>

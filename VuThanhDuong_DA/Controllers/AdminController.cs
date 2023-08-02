@@ -55,6 +55,12 @@ namespace VuThanhDuong_DA.Controllers
             return PartialView();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Remove("admin");
+            return RedirectToAction("Index", "Admin");
+        }
+
         public ActionResult Edit()
         {
             return View();

@@ -1,0 +1,53 @@
+﻿@using VuThanhDuong_DA.Models
+@model List<user_order_product>
+
+<div class="modal fade" role="dialog" data-toggle="modal" id="orderDetailsModal" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Các mặt hàng đã đặt</h5>
+            </div>
+                <div class="modal-body">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>
+                                            Mã sản phẩm
+                                        </th>
+                                        <th>
+                                            Tên sản phẩm
+                                        </th>
+                                        <th>
+                                            Số lượng đặt
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (user_order_product item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">
+                                                @item.product_id
+                                            </td>
+                                            <td>
+                                                @item.product_name
+                                            </td>
+                                            <td class="text-center">
+                                                @item.order_product_amount
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>                
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-danger" type="button" data-dismiss="modal">Thoát</button>
+                </div>
+        </div>
+    </div>
+</div>

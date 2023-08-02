@@ -2366,6 +2366,8 @@
     <Content Include="Views\Admin\Sidebar.cshtml" />
     <Content Include="Views\Admin\CategoryList.cshtml" />
     <Content Include="Views\Cart\RequestOrder.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\Purchase\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

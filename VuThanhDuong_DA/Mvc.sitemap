@@ -8,9 +8,11 @@
 	  <mvcSiteMapNode title="Hướng dẫn mua hàng" controller="Home" action="Instruction"/>
       <mvcSiteMapNode title="Liên lạc" controller="Home" action="Contact"/>
 	  <mvcSiteMapNode title="Sản phẩm" controller="Product" action="All">
-		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details"/>
+		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details" preservedRouteParameters="id"/>
 	  </mvcSiteMapNode>
-	  <mvcSiteMapNode title="Danh mục sản phẩm" controller="Product" action="Category"/>
+	  <mvcSiteMapNode title="Danh mục sản phẩm" controller="Product" action="Category" preservedRouteParameters="id">
+		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details" preservedRouteParameters="id"/>
+	  </mvcSiteMapNode>
 	  <mvcSiteMapNode title="Tìm kiếm sản phẩm" controller="Product" action="Search"/>
   </mvcSiteMapNode>
 </mvcSiteMap>

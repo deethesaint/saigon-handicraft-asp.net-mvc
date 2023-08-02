@@ -271,6 +271,10 @@ namespace VuThanhDuong_DA.Models
 		
 		private int _product_id;
 		
+		private string _product_name;
+		
+		private System.Nullable<int> _order_product_amount;
+		
 		private EntityRef<product> _product;
 		
 		private EntityRef<user_order> _user_order;
@@ -283,6 +287,10 @@ namespace VuThanhDuong_DA.Models
     partial void Onuser_order_idChanged();
     partial void Onproduct_idChanging(int value);
     partial void Onproduct_idChanged();
+    partial void Onproduct_nameChanging(string value);
+    partial void Onproduct_nameChanged();
+    partial void Onorder_product_amountChanging(System.Nullable<int> value);
+    partial void Onorder_product_amountChanged();
     #endregion
 		
 		public user_order_product()
@@ -336,6 +344,46 @@ namespace VuThanhDuong_DA.Models
 					this._product_id = value;
 					this.SendPropertyChanged("product_id");
 					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_name", DbType="NVarChar(255)")]
+		public string product_name
+		{
+			get
+			{
+				return this._product_name;
+			}
+			set
+			{
+				if ((this._product_name != value))
+				{
+					this.Onproduct_nameChanging(value);
+					this.SendPropertyChanging();
+					this._product_name = value;
+					this.SendPropertyChanged("product_name");
+					this.Onproduct_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_product_amount", DbType="Int")]
+		public System.Nullable<int> order_product_amount
+		{
+			get
+			{
+				return this._order_product_amount;
+			}
+			set
+			{
+				if ((this._order_product_amount != value))
+				{
+					this.Onorder_product_amountChanging(value);
+					this.SendPropertyChanging();
+					this._order_product_amount = value;
+					this.SendPropertyChanged("order_product_amount");
+					this.Onorder_product_amountChanged();
 				}
 			}
 		}
@@ -1698,6 +1746,8 @@ namespace VuThanhDuong_DA.Models
 		
 		private System.Nullable<bool> _is_delivered;
 		
+		private System.Nullable<decimal> _order_total_value;
+		
 		private EntitySet<user_order_product> _user_order_products;
 		
 		private EntityRef<user_account> _user_account;
@@ -1724,6 +1774,8 @@ namespace VuThanhDuong_DA.Models
     partial void Onis_processedChanged();
     partial void Onis_deliveredChanging(System.Nullable<bool> value);
     partial void Onis_deliveredChanged();
+    partial void Onorder_total_valueChanging(System.Nullable<decimal> value);
+    partial void Onorder_total_valueChanged();
     #endregion
 		
 		public user_order()
@@ -1913,6 +1965,26 @@ namespace VuThanhDuong_DA.Models
 					this._is_delivered = value;
 					this.SendPropertyChanged("is_delivered");
 					this.Onis_deliveredChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_total_value", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> order_total_value
+		{
+			get
+			{
+				return this._order_total_value;
+			}
+			set
+			{
+				if ((this._order_total_value != value))
+				{
+					this.Onorder_total_valueChanging(value);
+					this.SendPropertyChanging();
+					this._order_total_value = value;
+					this.SendPropertyChanged("order_total_value");
+					this.Onorder_total_valueChanged();
 				}
 			}
 		}

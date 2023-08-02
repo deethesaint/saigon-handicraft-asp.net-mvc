@@ -130,7 +130,7 @@
                         user_account user = Session["currentUser"] as user_account;
                         <p class="font-weight-normal m-0 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
                         <p class="font-weight-normal m-0 mr-2 d-inline">| Điểm tích lũy: @user.user_point</p>
-                        <a class="btn btn-outline-warning" style="width: 115px" href="#!"><i class="fa-solid fa-barcode"></i> Đơn hàng</a>
+                        <a class="btn btn-outline-warning" style="width: 115px" href="~/Purchase/Index"><i class="fa-solid fa-barcode"></i> Đơn hàng</a>
                         <a class="btn btn-outline-info" style="width: 115px" href="~/Cart/Index"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
                         <button class="btn btn-outline-primary" style="width: 115px"><i class="fa-solid fa-user"></i> Hồ sơ</button>
                         <button class="btn btn-outline-danger" style="width: 115px" type="button" data-toggle="modal" data-target="#logOutModal"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>

@@ -14,7 +14,7 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.sum = GetCart().Sum(pc => pc.Price * pc.Amount);
+            ViewBag.sum = GetCart().Sum(pc => (pc.Price - pc.Discount) * pc.Amount);
             ViewBag.amount = GetCart().Sum(pc => pc.Amount);
             return View(GetCart());
         }
@@ -69,7 +69,7 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult RequestOrder()
         {
-            ViewBag.sum = GetCart().Sum(pc => pc.Price * pc.Amount);
+            ViewBag.sum = GetCart().Sum(pc => (pc.Price - pc.Discount) * pc.Amount);
             ViewBag.amount = GetCart().Sum(pc => pc.Amount);
             return View(GetCart());
         }
@@ -94,6 +94,7 @@ namespace VuThanhDuong_DA.Controllers
                     uo.user_order_address = Request["Order_owner_address"];
                     uo.user_order_email = Request["Order_owner_email"];
                     uo.user_order_phonenumber = Request["Order_owner_phone"];
+                    uo.order_total_value = GetCart().Sum(pc => (pc.Price - pc.Discount) * pc.Amount);
                     dbContext.user_orders.InsertOnSubmit(uo);
                     dbContext.SubmitChanges();
                     foreach (InCartProduct product in products)
@@ -101,6 +102,8 @@ namespace VuThanhDuong_DA.Controllers
                         user_order_product uop = new user_order_product();
                         uop.product_id = product.Id;
                         uop.user_order_id = uo.user_order_id;
+                        uop.product_name = product.Name;
+                        uop.order_product_amount = product.Amount;
                         dbContext.user_order_products.InsertOnSubmit(uop);
                     }
                     dbContext.SubmitChanges();

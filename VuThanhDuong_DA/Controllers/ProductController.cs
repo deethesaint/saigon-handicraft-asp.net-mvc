@@ -18,7 +18,7 @@ namespace VuThanhDuong_DA.Controllers
             return RedirectToAction("All", "Product");
         }
 
-        public ActionResult All()
+        public ActionResult All(int displayMode = 0)
         {
             using (var dbContext = new SHSDBDataContext())
             {
@@ -26,7 +26,7 @@ namespace VuThanhDuong_DA.Controllers
             }
         }
 
-        public ActionResult Category(int id = 0)
+        public ActionResult Category(int id = 0, int displayMode = 0)
         {
             using (var dbContext = new SHSDBDataContext())
             {
@@ -46,7 +46,7 @@ namespace VuThanhDuong_DA.Controllers
             }
         }
 
-        public ActionResult Search()
+        public ActionResult Search(int displayMode = 0)
         {
             return View();
         }
