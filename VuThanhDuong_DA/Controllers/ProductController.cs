@@ -42,6 +42,7 @@ namespace VuThanhDuong_DA.Controllers
             {
                 product prd = dbContext.products.SingleOrDefault(p => p.product_id == id);
                 ViewBag.images = prd.product_images.ToList();
+                ViewBag.category = prd.product_category.product_category_name;
                 return View(prd);
             }
         }

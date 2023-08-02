@@ -110,7 +110,13 @@ namespace VuThanhDuong_DA.Controllers
                     Session.Remove("cart");
                 }
             }
+            TempData["submitSucceed"] = 1;
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult SubmitSucceed()
+        {
+            return PartialView();
         }
     }
 }

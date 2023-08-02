@@ -300,22 +300,21 @@
     {
         @Html.Action("RegisterSuccessfully", "User")
     }
-
+    @if (TempData["submitSucceed"] != null)
+    {
+        @Html.Action("SubmitSucceed", "Cart");
+    } 
     <script>
         $(document).ready(function () {
-            // Lấy chiều cao của phần header
             var headerHeight = $("#banner").height();
             $("#loginFailedModal").modal("show");
             $("#registerFailedModal").modal("show");
             $("#registerSucessfullyModal").modal("show");
-            // Sự kiện cuộn chuột
+            $("#submitSucceedModal").modal("show");
             $(window).scroll(function () {
-                // Nếu cuộn chuột xuống đến một độ cao lớn hơn chiều cao của header
                 if ($(this).scrollTop() > headerHeight) {
-                    // Thêm class 'fixed-top' vào menu điều hướng
                     $("#mainNav").addClass("fixed-top");
                 } else {
-                    // Xóa class 'fixed-top' khỏi menu điều hướng
                     $("#mainNav").removeClass("fixed-top");
                 }
             });

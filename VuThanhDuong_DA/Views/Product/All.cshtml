@@ -7,6 +7,21 @@
 @model List<product>
 
 <div class="container-fluid mt-3 pb-3">
+    <div class="row-pl-2 mb-3 border-bottom">
+        <div class="col-12">
+            <h3>Tất cả sản phẩm</h3>
+        </div>
+    </div>
+    <div class="row-pl-2 mb-3 pb-3 border-bottom">
+        <div class="col-12 text-right">
+            <span><i class="fa-solid fa-filter d-inline"></i> Sắp xếp:</span>
+            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-not-equal"></i> Mặc định</a>
+            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-a-z"></i> A-Z</a>
+            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-a-z"></i> Z-A</a>
+            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-1-9"></i> Giá tăng dần</a>
+            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-1-9"></i> Giá giảm dần</a>
+        </div>
+    </div>
     <div class="row pl-2">
         @{
             var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");

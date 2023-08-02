@@ -42,6 +42,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <h3>@Model.product_name</h3>
+                    </div>
+                    <div class="row">
+                        <p>Loại sản phẩm: @ViewBag.category</p>
+                    </div>
+                    <div class="row">
                         <p>@Model.product_description</p>
                     </div>
                     <div class="row">
@@ -70,7 +75,7 @@
                                 }
                                 else
                                 {
-                                    <a class="btn-lg btn-warning" href="#">LIÊN HỆ TÔI KHI CÓ HÀNG</a>
+                                    <a class="btn-lg btn-warning" href="#!">LIÊN HỆ TÔI KHI CÓ HÀNG</a>
                                 }
                             }
                         </div>

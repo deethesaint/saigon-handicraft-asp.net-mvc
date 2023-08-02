@@ -6,7 +6,10 @@
     ViewBag.Title = "CategoryList";
     Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
 }
-
+@{ 
+    List<int> counts = ViewBag.countlist;
+    int index = 0;
+}
 <div class="container-fluid m-0 p-0">
     <div class="row">
         <div class="col-12 text-center">
@@ -44,7 +47,7 @@
                                     @Html.DisplayFor(modelItem => item.product_category_name)
                                 </td>
                                 <td class="text-center">
-                                    
+                                    @counts[index++]
                                 </td>
                                 <td class="text-center">
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.product_category_id }) |
