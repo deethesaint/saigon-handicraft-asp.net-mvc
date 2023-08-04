@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+
+@using VuThanhDuong_DA.Models
+@model product
+@{ 
+    List<product_category> Categories = ViewBag.categories as List<product_category>;
+    List<product_image> images = ViewBag.images as List<product_image>;
+}
+
+<form method="post" action="~/Admin/ProductEdit" enctype="multipart/form-data">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center p-3 m-3 border-bottom">
+                <h4>CHỈNH SỬA SẢN PHẨM</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <div class="form">
+                    <div class="form-group">
+                        <label>Mã sản phẩm</label>
+                        <input name="product_id" class="form-control" value="@Model.product_id" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Danh mục sản phẩm</label>
+                        <select id="slt" name="category_id" class="form-control">
+                            @foreach (product_category item in Categories)
+                            {
+                                <option value="@item.product_category_id">@item.product_category_name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tên sản phẩm</label>
+                        <input name="product_name" class="form-control" value="@Model.product_name" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả sản phẩm</label>
+                        <textarea name="product_description" class="form-control" style="height: 250px" required>@Model.product_description</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Ảnh đại diện</label>
+                        <p></p>
+                        <img class="m-1" src="~/Images/@Model.product_thumbnail_image" style="width: 100px; height: 85px"/>
+                        <input name="product_thumbnail" class="form-control" type="file" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ảnh chi tiết</label>
+                        <p></p>
+                        @if (0 < images.Count)
+                        {
+                            <img class="m-1" src="~/Images/@images[0].product_image_file_name" style="width: 100px; height: 85px"/>
+                        }
+                        else
+                        {
+                            <p class="p-1">Không có ảnh chi tiết #1</p>
+                        }
+                        <input name="img_1" class="form-control-file" type="file" />
+                        @if (1 < images.Count)
+                        {
+                            <img class="m-1" src="~/Images/@images[1].product_image_file_name" style="width: 100px; height: 85px"/>
+                        }
+                        else
+                        {
+                            <p class="p-1">Không có ảnh chi tiết #2</p>
+                        }
+                        <input name="img_2" class="form-control-file" type="file" />
+                        @if (2 < images.Count)
+                        {
+                            <img class="m-1" src="~/Images/@images[2].product_image_file_name" style="width: 100px; height: 85px"/>
+                        }
+                        else
+                        {
+                            <p class="p-1">Không có ảnh chi tiết #3</p>
+                        }
+                        <input name="img_3" class="form-control-file" type="file" />
+                        @if (3 < images.Count)
+                        {
+                            <img class="m-1" src="~/Images/@images[3].product_image_file_name" style="width: 100px; height: 85px"/>
+                        }
+                        else
+                        {
+                            <p class="p-1">Không có ảnh chi tiết #4</p>
+                        }
+                        <input name="img_4" class="form-control-file" type="file"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Giá</label>
+                        <input name="product_price" class="form-control" type="number" min="0" value="@Model.product_price" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giảm giá</label>
+                        <input name="product_discount" class="form-control" type="number" min="0" value="@Model.product_discount" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng hàng tồn</label>
+                        <input name="product_inventory" class="form-control" type="number" min="0" value="@Model.product_inventory" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12 text-center d-inline">
+                        <input class="btn btn-success" type="submit" value="Chỉnh sửa sản phẩm" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+    </div>
+</form>
+
+@if (TempData["productEditSucceed"] != null)
+{
+    <div class="modal fade show" role="dialog" data-toggle="modal" id="editSucceedModal" aria-labelledby="editSucceedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-success">Chỉnh sửa sản phẩm thành công.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" type="button" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#editSucceedModal").modal("show");
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        var selected = $('#slt option[value="@Model.product_category_id"]');
+        if (selected.length > 0) {
+            selected.attr("selected", "selected");
+        }
+    });
+</script>

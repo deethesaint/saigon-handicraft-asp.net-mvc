@@ -14,5 +14,10 @@
 		  <mvcSiteMapNode title="Chi tiết sản phẩm" controller="Product" action="Details" preservedRouteParameters="id"/>
 	  </mvcSiteMapNode>
 	  <mvcSiteMapNode title="Tìm kiếm sản phẩm" controller="Product" action="Search"/>
+	  <mvcSiteMapNode title="Giỏ hàng" controller="Cart" action="Index"/>
+	  <mvcSiteMapNode title="Đơn hàng" controller="Purchase" action="Index"/>
+	  <mvcSiteMapNode title="Người dùng" controller="User" action="Edit">
+		  <mvcSiteMapNode title="Đổi mật khẩu" controller="User" action="ChangePassword"/>
+	  </mvcSiteMapNode>
   </mvcSiteMapNode>
 </mvcSiteMap>

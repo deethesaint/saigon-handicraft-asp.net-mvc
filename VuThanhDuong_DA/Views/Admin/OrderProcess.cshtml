@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "OrderProcess";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+
+@using VuThanhDuong_DA.Models
+@model List<user_order>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 border-bottom mt-1 text-center">
+            <h4>DANH SÁCH ĐƠN HÀNG CHỜ XÁC NHẬN</h4>
+        </div>
+        <div class="col-11">
+            @{
+                var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                foreach (user_order item in Model)
+                {
+                    <div class="container m-5 bg-light p-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Họ và tên người mua: <span class="font-weight-bold">@item.user_order_buyer_name</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p>Số điện thoại: <span class="font-weight-bold">@item.user_order_phonenumber</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Email: <span class="font-weight-bold">@item.user_order_email</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p>Địa chỉ nhận hàng: <span class="font-weight-bold">@item.user_order_address</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Thời gian đặt hàng: <span class="font-weight-bold">@item.order_time</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p>Mã đơn hàng: <span class="font-weight-bold">@item.user_order_id</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 d-inline">
+                                <p class="d-inline">Trạng thái đơn hàng: </p>
+                                @if (item.is_delivered == true)
+                                {
+                                    <p class="d-inline font-weight-bold text-success">Đã giao hàng</p>
+                                }
+                                else if (item.is_processed == false)
+                                {
+                                    <p class="d-inline font-weight-bold text-warning">Đang được xử lý</p>
+                                }
+                                else
+                                {
+                                    <p class="d-inline font-weight-bold text-primary">Đang trên đường giao</p>
+                                }
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <p>Tổng giá trị đơn hàng: <span class="font-weight-bold">@String.Format(info, "{0:C0}", item.order_total_value)</span></p>
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-primary m-1" href="~/Admin/OrderProcess/@item.user_order_id">Xem sản phẩm</a>
+                                <a class="btn btn-success m-1" href="~/Admin/OrderProcessConfirm/@item.user_order_id">Xác nhận đơn hàng</a>
+                                <button id="@item.user_order_id" class="btn btn-danger m-1" onclick="confirmCancel('@item.user_order_id')">Hủy đơn hàng</button>
+                                    <script>
+                                    $(document).ready(function() {
+                                        $("#orderDetailsModal").modal("show");
+                                    });
+                                    </script>
+                            </div>
+                        </div>
+                        <div id="@item.user_order_id-row" class="row mt-3 invisible">
+                            <div class="col-12 d-inline text-right">
+                                <p class="d-inline">Hủy đơn hàng này?</p>
+                                <a class="btn btn-primary" href="~/Admin/CancelOrderFromProcess/@item.user_order_id">Hủy</a>
+                                <button class="btn btn-secondary" onclick="notCancel('@item.user_order_id')">Không</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-1">
+
+        </div>
+    </div>
+</div>
+
+@if (TempData["details"] != null)
+{
+    @Html.Action("OrderDetails", "Admin")
+}
+<script>
+    function confirmCancel(id) {
+        $('#' + id + '-row').removeClass("invisible");
+    }
+    function notCancel(id) {
+        $('#' + id + '-row').addClass("invisible");
+    }
+</script>

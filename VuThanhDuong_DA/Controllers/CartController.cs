@@ -105,6 +105,9 @@ namespace VuThanhDuong_DA.Controllers
                         uop.product_name = product.Name;
                         uop.order_product_amount = product.Amount;
                         dbContext.user_order_products.InsertOnSubmit(uop);
+                        product prd = dbContext.products.SingleOrDefault(p => p.product_id == product.Id);
+                        prd.product_inventory -= product.Amount;
+                        prd.product_bought_count += product.Amount;
                     }
                     dbContext.SubmitChanges();
                     Session.Remove("cart");

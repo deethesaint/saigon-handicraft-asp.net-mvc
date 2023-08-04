@@ -42,6 +42,7 @@
       <Column Name="product_inventory" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="product_user_order_product" Member="user_order_products" ThisKey="product_id" OtherKey="product_id" Type="user_order_product" />
       <Association Name="product_product_image" Member="product_images" ThisKey="product_id" OtherKey="product_id" Type="product_image" />
+      <Association Name="product_product_review" Member="product_reviews" ThisKey="product_id" OtherKey="product_id" Type="product_review" />
       <Association Name="product_category_product" Member="product_category" ThisKey="product_category_id" OtherKey="product_category_id" Type="product_category" IsForeignKey="true" />
     </Type>
   </Table>
@@ -62,6 +63,17 @@
       <Association Name="product_product_image" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.product_review" Member="product_reviews">
+    <Type Name="product_review">
+      <Column Name="product_review_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_account_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="product_review_content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="review_owner" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="product_product_review" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" />
+      <Association Name="user_account_product_review" Member="user_account" ThisKey="user_account_id" OtherKey="user_account_id" Type="user_account" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.user_account" Member="user_accounts">
     <Type Name="user_account">
       <Column Name="user_account_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -75,6 +87,7 @@
       <Column Name="user_lastname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="user_member_tier" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="user_point" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="user_account_product_review" Member="product_reviews" ThisKey="user_account_id" OtherKey="user_account_id" Type="product_review" />
       <Association Name="user_account_user_order" Member="user_orders" ThisKey="user_account_id" OtherKey="user_account_id" Type="user_order" />
     </Type>
   </Table>

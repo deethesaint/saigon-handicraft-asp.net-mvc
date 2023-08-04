@@ -14,6 +14,7 @@ namespace VuThanhDuong_DA.Models
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
         public int Amount { get; set; }
+        public int MaxAmount { get; set; }
         public InCartProduct(int id)
         {
             using (var dbContext = new SHSDBDataContext())
@@ -25,6 +26,7 @@ namespace VuThanhDuong_DA.Models
                 Price = (decimal)prd.product_price;
                 Discount = (decimal)prd.product_discount;
                 Amount = 1;
+                MaxAmount = (int)prd.product_inventory;
             }
         }
     }

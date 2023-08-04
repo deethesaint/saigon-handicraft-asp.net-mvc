@@ -5,6 +5,12 @@
 @using VuThanhDuong_DA.Models
 @model product
 
+@{
+    List<product_review> reviews = ViewBag.reviews as List<product_review>;
+    List<product> otherProduct = ViewBag.otherProducts as List<product>;
+    int numRange = 1;
+}
+
 @if (Model != null)
 {
     var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
@@ -19,10 +25,10 @@
                         if (ViewBag.images != null)
                         {
                             List<product_image> im = ViewBag.images as List<product_image>;
-                            foreach(var i in im)
+                            foreach (var i in im)
                             {
                                 <li class="nav-item mt-1">
-                                    <img id="@i.product_image_id" class="img-thumbnail m-0" src="~/Images/@i.product_image_file_name" onclick="imgClick(@i.product_image_id)" style=" cursor: pointer; height: 75px"/>
+                                    <img id="@i.product_image_id" class="img-thumbnail m-0" src="~/Images/@i.product_image_file_name" onclick="imgClick(@i.product_image_id)" style=" cursor: pointer; height: 75px" />
                                 </li>
                             }
                         }
@@ -33,7 +39,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <img id="imagecurrent" class="img-thumbnail" src="~/Images/@Model.product_thumbnail_image" style="width: 100%; height: 350px;"/>
+                            <img id="imagecurrent" class="img-thumbnail" src="~/Images/@Model.product_thumbnail_image" style="width: 100%; height: 350px;" />
                         </div>
                     </div>
                 </div>
@@ -53,17 +59,18 @@
                         <h3 class="text-danger">@String.Format(info, "{0:C0}", Model.product_price)</h3>
                     </div>
                     <div class="row">
-                        <h6>Tình trạng: 
-                        @{ 
-                            if (Model.product_inventory > 0)
-                            {
-                                <span class="text-success">Còn hàng</span>
+                        <h6>
+                            Tình trạng:
+                            @{
+                                if (Model.product_inventory > 0)
+                                {
+                                    <span class="text-success">Còn hàng</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Hết hàng</span>
+                                }
                             }
-                            else
-                            {
-                                <span class="text-danger">Hết hàng</span>
-                            }
-                        }
                         </h6>
                     </div>
                     <div class="row mt-5">
@@ -83,11 +90,119 @@
                 </div>
             </div>
         </div>
+        <div class="row border-top mt-4 border-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 border-bottom mt-2 mb-2">
+                        <h5>Sản phẩm khác cùng loại</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (product p in otherProduct)
+                    {
+                        <a href="~/Product/Details/?id=@p.product_id">
+                            <div class="card m-1" style="width: 17vw">
+                                <img class="card-img-top img-fluid" src="~/Images/@p.product_thumbnail_image" style="width: 100vw; height: 170px" />
+                                <div class="card-footer text-center">
+                                    <p class="font-weight-bold text-truncate" style="width: 100%">
+                                        @p.product_name
+                                    </p>
+                                    <p class="card-subtitle font-weight-bold mt-1 text-danger">
+                                        <span class="text-dark">Giá:</span> @String.Format(info, "{0:C0}", p.product_price)
+                                    </p>
+                                </div>
+                                @if (p.product_inventory == 0)
+                                {
+                                    <span class="badge badge-danger" style="position: absolute; left: 0; top: 0">HẾT HÀNG</span>
+                                }
+                                else if (p.product_discount > 0)
+                                {
+                                    <span class="badge badge-warning" style="position: absolute; left: 0; top: 0">GIẢM GIÁ</span>
+                                }
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div> 
+        </div>
+        <div class="row mt-5 pt-5">
+            <div class="col-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Để lại bình luận của bạn</h5>
+                            @if (Session["currentUser"] != null)
+                            {
+                                <form method="post" action="~/Product/PostReview">
+                                    <input name="product_id" style="display: none" value="@Model.product_id" />
+                                    <div class="form-group">
+                                        <label>Nội dung bình luận</label>
+                                        <textarea class="form-control" name="review_content" style="height: 300px" required maxlength="255"></textarea>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input class="btn btn-primary" type="submit" value="Đăng bình luận" />
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <p class="m-3">Bạn cần đăng nhập để có thể bình luận!</p>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <h5>Đánh giá khác (@reviews.Count)</h5>
+
+                            @foreach (product_review review in reviews)
+                            {
+                                <div id="_@numRange" class="container-fluid m-3 border rounded hiddenComp">
+                                    <div class="row border-bottom">
+                                        <div class="col-12 bg-light">
+                                            <p class="p-0 m-0">Người dùng: <span class="font-weight-bold" style="font-size: 16px">@review.review_owner</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="lead p-0 m-1" style="font-size: 18px">@review.product_review_content</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                numRange++;
+                            }
+                            <div class="col-12 text-center mt-4">
+                                <button id="btnLoad" class="btn btn-outline-dark" onclick="loadMore()">Tải thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
 <script>
     function imgClick(string) {
         var m = document.getElementById("imagecurrent");
         m.src = document.getElementById(string).src;
+    }
+</script>
+
+<script>
+    let max = @numRange;
+    let x = 6;
+    $(document).ready(function () {
+        if (6 >= max - 1) {
+            $("#btnLoad").addClass("hiddenComp");
+        }
+        for (let i = 1; i <= 6; ++i) {
+            $("#_" + i.toString()).removeClass("hiddenComp");
+        }
+    });
+    function loadMore() {
+        if (x + 6 >= max) {
+            $("#btnLoad").addClass("hiddenComp");
+        }
+        for (let i = x + 1; i <= x + 6; ++i) {
+            $("#" + i.toString()).removeClass("hiddenComp");
+        }
+        x += 6;
     }
 </script>

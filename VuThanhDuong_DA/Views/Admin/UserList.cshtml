@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+@model IEnumerable<VuThanhDuong_DA.Models.user_account>
+
+
+<div class="container-fluid m-0 p-0">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h4>DANH SÁCH TÀI KHOẢN</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <table class="table">
+                    <thead class="bg-light text-center">
+                        <tr>
+                            <th>
+                                Mã tài khoản
+                            </th>
+                            <th>
+                                Tên người dùng
+                            </th>
+                            <th>
+                                Họ và tên
+                            </th>
+                            <th>
+                                Điểm tích lũy
+                            </th>
+                            <th>
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.user_account_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.user_username)
+                                </td>
+                                <td class="text-center">
+                                    @(item.user_lastname + " " + item.user_firstname)
+                                </td>
+                                <td class="text-center">
+                                    @item.user_point
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-success" href="~/Admin/UserEdit/?id=@item.user_account_id">Sửa</a>
+                                    <button class="btn btn-danger" onclick="confirmDelete('@item.user_account_id')">Xóa</button>
+                                </td>
+                            </tr>
+                            <tr id="@item.user_account_id" class="border-0 hiddenComp">
+                                <td colspan="5">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 text-right">
+                                                <p class="d-inline">Bạn có chắc muốn xóa?</p>
+                                                <a class="btn btn-primary" href="~/Admin/UserDelete/?id=@item.user_account_id">Chắc chắn</a>
+                                                <button class="btn btn-secondary" onclick="noDelete('@item.user_account_id')">Không</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(string) {
+        $('#' + string).removeClass("hiddenComp");
+    }
+    function noDelete(string) {
+        $('#' + string).addClass("hiddenComp");
+    }
+</script>

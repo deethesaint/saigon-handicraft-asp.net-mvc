@@ -68,7 +68,7 @@
                                                     @String.Format(info, "{0:C0}", icp.Discount)
                                                 </td>
                                                 <td>
-                                                    <input min="1" name="@icp.Id" class="text-center w-25" type="number" value="@icp.Amount" />
+                                                    <input min="1" max="@icp.MaxAmount" name="@icp.Id" class="text-center w-50" type="number" value="@icp.Amount" />
                                                 </td>
                                                 <td>
                                                     @String.Format(info, "{0:C0}", ((icp.Price - icp.Discount) * icp.Amount));

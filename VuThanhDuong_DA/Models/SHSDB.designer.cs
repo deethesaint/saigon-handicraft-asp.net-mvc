@@ -48,6 +48,9 @@ namespace VuThanhDuong_DA.Models
     partial void Insertproduct_image(product_image instance);
     partial void Updateproduct_image(product_image instance);
     partial void Deleteproduct_image(product_image instance);
+    partial void Insertproduct_review(product_review instance);
+    partial void Updateproduct_review(product_review instance);
+    partial void Deleteproduct_review(product_review instance);
     partial void Insertuser_account(user_account instance);
     partial void Updateuser_account(user_account instance);
     partial void Deleteuser_account(user_account instance);
@@ -131,6 +134,14 @@ namespace VuThanhDuong_DA.Models
 			get
 			{
 				return this.GetTable<product_image>();
+			}
+		}
+		
+		public System.Data.Linq.Table<product_review> product_reviews
+		{
+			get
+			{
+				return this.GetTable<product_review>();
 			}
 		}
 		
@@ -708,6 +719,8 @@ namespace VuThanhDuong_DA.Models
 		
 		private EntitySet<product_image> _product_images;
 		
+		private EntitySet<product_review> _product_reviews;
+		
 		private EntityRef<product_category> _product_category;
 		
     #region Extensibility Method Definitions
@@ -742,6 +755,7 @@ namespace VuThanhDuong_DA.Models
 		{
 			this._user_order_products = new EntitySet<user_order_product>(new Action<user_order_product>(this.attach_user_order_products), new Action<user_order_product>(this.detach_user_order_products));
 			this._product_images = new EntitySet<product_image>(new Action<product_image>(this.attach_product_images), new Action<product_image>(this.detach_product_images));
+			this._product_reviews = new EntitySet<product_review>(new Action<product_review>(this.attach_product_reviews), new Action<product_review>(this.detach_product_reviews));
 			this._product_category = default(EntityRef<product_category>);
 			OnCreated();
 		}
@@ -996,6 +1010,19 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_product_review", Storage="_product_reviews", ThisKey="product_id", OtherKey="product_id")]
+		public EntitySet<product_review> product_reviews
+		{
+			get
+			{
+				return this._product_reviews;
+			}
+			set
+			{
+				this._product_reviews.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_category_product", Storage="_product_category", ThisKey="product_category_id", OtherKey="product_category_id", IsForeignKey=true)]
 		public product_category product_category
 		{
@@ -1069,6 +1096,18 @@ namespace VuThanhDuong_DA.Models
 		}
 		
 		private void detach_product_images(product_image entity)
+		{
+			this.SendPropertyChanging();
+			entity.product = null;
+		}
+		
+		private void attach_product_reviews(product_review entity)
+		{
+			this.SendPropertyChanging();
+			entity.product = this;
+		}
+		
+		private void detach_product_reviews(product_review entity)
 		{
 			this.SendPropertyChanging();
 			entity.product = null;
@@ -1392,6 +1431,246 @@ namespace VuThanhDuong_DA.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.product_review")]
+	public partial class product_review : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _product_review_id;
+		
+		private System.Nullable<int> _user_account_id;
+		
+		private System.Nullable<int> _product_id;
+		
+		private string _product_review_content;
+		
+		private string _review_owner;
+		
+		private EntityRef<product> _product;
+		
+		private EntityRef<user_account> _user_account;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onproduct_review_idChanging(int value);
+    partial void Onproduct_review_idChanged();
+    partial void Onuser_account_idChanging(System.Nullable<int> value);
+    partial void Onuser_account_idChanged();
+    partial void Onproduct_idChanging(System.Nullable<int> value);
+    partial void Onproduct_idChanged();
+    partial void Onproduct_review_contentChanging(string value);
+    partial void Onproduct_review_contentChanged();
+    partial void Onreview_ownerChanging(string value);
+    partial void Onreview_ownerChanged();
+    #endregion
+		
+		public product_review()
+		{
+			this._product = default(EntityRef<product>);
+			this._user_account = default(EntityRef<user_account>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_review_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int product_review_id
+		{
+			get
+			{
+				return this._product_review_id;
+			}
+			set
+			{
+				if ((this._product_review_id != value))
+				{
+					this.Onproduct_review_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_review_id = value;
+					this.SendPropertyChanged("product_review_id");
+					this.Onproduct_review_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_account_id", DbType="Int")]
+		public System.Nullable<int> user_account_id
+		{
+			get
+			{
+				return this._user_account_id;
+			}
+			set
+			{
+				if ((this._user_account_id != value))
+				{
+					if (this._user_account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_account_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_account_id = value;
+					this.SendPropertyChanged("user_account_id");
+					this.Onuser_account_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="Int")]
+		public System.Nullable<int> product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_review_content", DbType="NVarChar(MAX)")]
+		public string product_review_content
+		{
+			get
+			{
+				return this._product_review_content;
+			}
+			set
+			{
+				if ((this._product_review_content != value))
+				{
+					this.Onproduct_review_contentChanging(value);
+					this.SendPropertyChanging();
+					this._product_review_content = value;
+					this.SendPropertyChanged("product_review_content");
+					this.Onproduct_review_contentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_review_owner", DbType="NVarChar(255)")]
+		public string review_owner
+		{
+			get
+			{
+				return this._review_owner;
+			}
+			set
+			{
+				if ((this._review_owner != value))
+				{
+					this.Onreview_ownerChanging(value);
+					this.SendPropertyChanging();
+					this._review_owner = value;
+					this.SendPropertyChanged("review_owner");
+					this.Onreview_ownerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_product_review", Storage="_product", ThisKey="product_id", OtherKey="product_id", IsForeignKey=true)]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.product_reviews.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.product_reviews.Add(this);
+						this._product_id = value.product_id;
+					}
+					else
+					{
+						this._product_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_product_review", Storage="_user_account", ThisKey="user_account_id", OtherKey="user_account_id", IsForeignKey=true)]
+		public user_account user_account
+		{
+			get
+			{
+				return this._user_account.Entity;
+			}
+			set
+			{
+				user_account previousValue = this._user_account.Entity;
+				if (((previousValue != value) 
+							|| (this._user_account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user_account.Entity = null;
+						previousValue.product_reviews.Remove(this);
+					}
+					this._user_account.Entity = value;
+					if ((value != null))
+					{
+						value.product_reviews.Add(this);
+						this._user_account_id = value.user_account_id;
+					}
+					else
+					{
+						this._user_account_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("user_account");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.user_account")]
 	public partial class user_account : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1419,6 +1698,8 @@ namespace VuThanhDuong_DA.Models
 		private string _user_member_tier;
 		
 		private System.Nullable<int> _user_point;
+		
+		private EntitySet<product_review> _product_reviews;
 		
 		private EntitySet<user_order> _user_orders;
 		
@@ -1452,6 +1733,7 @@ namespace VuThanhDuong_DA.Models
 		
 		public user_account()
 		{
+			this._product_reviews = new EntitySet<product_review>(new Action<product_review>(this.attach_product_reviews), new Action<product_review>(this.detach_product_reviews));
 			this._user_orders = new EntitySet<user_order>(new Action<user_order>(this.attach_user_orders), new Action<user_order>(this.detach_user_orders));
 			OnCreated();
 		}
@@ -1676,6 +1958,19 @@ namespace VuThanhDuong_DA.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_product_review", Storage="_product_reviews", ThisKey="user_account_id", OtherKey="user_account_id")]
+		public EntitySet<product_review> product_reviews
+		{
+			get
+			{
+				return this._product_reviews;
+			}
+			set
+			{
+				this._product_reviews.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_account_user_order", Storage="_user_orders", ThisKey="user_account_id", OtherKey="user_account_id")]
 		public EntitySet<user_order> user_orders
 		{
@@ -1707,6 +2002,18 @@ namespace VuThanhDuong_DA.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_product_reviews(product_review entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = this;
+		}
+		
+		private void detach_product_reviews(product_review entity)
+		{
+			this.SendPropertyChanging();
+			entity.user_account = null;
 		}
 		
 		private void attach_user_orders(user_order entity)

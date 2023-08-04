@@ -129,6 +129,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilterMode.cs" />
     <Compile Include="Models\InCartProduct.cs" />
     <Compile Include="Models\SHSDB.designer.cs">
       <AutoGen>True</AutoGen>
@@ -2374,6 +2375,16 @@
     <Content Include="Views\Home\New.cshtml" />
     <Content Include="Views\Home\MostPositive.cshtml" />
     <Content Include="Views\Home\MostBought.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\CategoryEdit.cshtml" />
+    <Content Include="Views\Admin\ProductList.cshtml" />
+    <Content Include="Views\Admin\ProductEdit.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Admin\UserEdit.cshtml" />
+    <Content Include="Views\Admin\OrderProcess.cshtml" />
+    <Content Include="Views\Admin\OrderDetails.cshtml" />
+    <Content Include="Views\Admin\OrderSucceed.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/Admin_LayoutPage.cshtml";
+}
+@model IEnumerable<VuThanhDuong_DA.Models.product>
+
+
+<div class="container-fluid m-0 p-0">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h4>DANH SÁCH SẢN PHẨM</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <table class="table">
+                    <thead class="bg-light text-center">
+                        <tr>
+                            <th>
+                                Mã sản phẩm
+                            </th>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Hình ảnh
+                            </th>
+                            <th>
+                                Số lượng tồn
+                            </th>
+                            <th>
+                                Hành động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.product_id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.product_name)
+                                </td>
+                                <td class="text-center">
+                                    <img style="width: 100px; height: 75px" src="~/Images/@item.product_thumbnail_image"/>
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.product_inventory)
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-success" href="~/Admin/ProductEdit/?id=@item.product_id">Sửa</a>
+                                    <button class="btn btn-danger" onclick="confirmDelete('@item.product_id')">Xóa</button>
+                                </td>
+                            </tr>
+                            <tr id="@item.product_id" class="border-0 hiddenComp">
+                                <td colspan="5">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 text-right">
+                                                <p class="d-inline">Bạn có chắc muốn xóa?</p>
+                                                <a class="btn btn-primary" href="~/Admin/ProductDelete/?id=@item.product_id">Chắc chắn</a>
+                                                <button class="btn btn-secondary" onclick="noDelete('@item.product_id')">Không</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(string) {
+        $('#' + string).removeClass("hiddenComp");
+    }
+    function noDelete(string) {
+        $('#' + string).addClass("hiddenComp");
+    }
+</script>

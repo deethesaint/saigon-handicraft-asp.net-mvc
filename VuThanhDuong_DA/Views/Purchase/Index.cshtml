@@ -70,12 +70,16 @@
                                     @if (item.is_delivered == false && item.is_processed == false)
                                     {
                                         <script>
-                                    $(document).ready(function() {
-                                        $("#@item.user_order_id").removeClass("invisible");
-                                        $("#orderDetailsModal").modal("show");
-                                    });
+                                            $(document).ready(function() {
+                                                $("#@item.user_order_id").removeClass("invisible");
+                                            });
                                         </script>
                                     }
+                                    <script>
+                                        $(document).ready(function() {
+                                            $("#orderDetailsModal").modal("show");
+                                        });
+                                    </script>
                                 </div>
                             </div>
                             <div id="@item.user_order_id-row" class="row mt-3 invisible">

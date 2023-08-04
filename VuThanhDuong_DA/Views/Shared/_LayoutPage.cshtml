@@ -127,15 +127,38 @@
             </div>
             <div class="col-9 text-right font-weight-bold">
                 @{
-
                     if (Session["currentUser"] != null)
                     {
                         user_account user = Session["currentUser"] as user_account;
                         <p class="font-weight-normal m-0 d-inline">Xin chào, @user.user_lastname @user.user_firstname</p>
-                        <p class="font-weight-normal m-0 mr-2 d-inline">| Điểm tích lũy: @user.user_point</p>
+                        <p class="font-weight-normal m-0 d-inline">| Điểm tích lũy: @user.user_point</p>
+                        <p class="font-weight-normal m-0 mr-2 d-inline">
+                            | Hạng: @{
+                                if (user.user_member_tier == UserRanking.BRONZE)
+                                {
+                                    <span style="color:#9c3a11"><i class="fa-solid fa-medal"></i> Đồng</span>
+                                }
+                                if (user.user_member_tier == UserRanking.SILVER)
+                                {
+                                    <span style="color:#aaaaaa"><i class="fa-solid fa-medal"></i> Bạc</span>
+                                }
+                                if (user.user_member_tier == UserRanking.GOLD)
+                                {
+                                    <span style="color:#e2dd00"><i class="fa-solid fa-medal"></i> Vàng</span>
+                                }
+                                if (user.user_member_tier == UserRanking.PLATINUM)
+                                {
+                                    <span style="color:#005f9f"><i class="fa-solid fa-medal"></i> Bạch Kim</span>
+                                }
+                                if (user.user_member_tier == UserRanking.DIAMOND)
+                                {
+                                    <span style="color:#00e6d8"><i class="fa-solid fa-medal"></i> Kim Cương</span>
+                                }
+                            }
+                        </p>
                         <a class="btn btn-outline-warning" style="width: 115px" href="~/Purchase/Index"><i class="fa-solid fa-barcode"></i> Đơn hàng</a>
                         <a class="btn btn-outline-info" style="width: 115px" href="~/Cart/Index"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a>
-                        <button class="btn btn-outline-primary" style="width: 115px"><i class="fa-solid fa-user"></i> Hồ sơ</button>
+                        <a class="btn btn-outline-primary" style="width: 115px" href="~/User/Edit"><i class="fa-solid fa-user"></i> Hồ sơ</a>
                         <button class="btn btn-outline-danger" style="width: 115px" type="button" data-toggle="modal" data-target="#logOutModal"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
                     }
                     else

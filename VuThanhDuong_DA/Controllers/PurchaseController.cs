@@ -12,7 +12,7 @@ namespace VuThanhDuong_DA.Controllers
         //
         // GET: /Purchase/
 
-        public ActionResult Index(int id = 0, int deleteIndex = 0)
+        public ActionResult Index(int id = 0)
         {
             if (Session["currentUser"] != null)
             {
@@ -23,6 +23,7 @@ namespace VuThanhDuong_DA.Controllers
                     {
                         TempData["id"] = id;
                         TempData["details"] = 1;
+                        return RedirectToAction("Index", "Purchase", new { id = 0, orders });
                     }
                     return View(orders);
                 }
@@ -51,6 +52,12 @@ namespace VuThanhDuong_DA.Controllers
             {
                 user_order deleteOrder = dbContext.user_orders.SingleOrDefault(uo => uo.user_order_id == id);
                 List<user_order_product> refDeleteOrder = dbContext.user_order_products.Where(op => op.user_order_id == deleteOrder.user_order_id).ToList();
+                foreach (user_order_product refProduct in refDeleteOrder)
+                {
+                    product prd = dbContext.products.SingleOrDefault(p => p.product_id == refProduct.product_id);
+                    prd.product_inventory += refProduct.order_product_amount;
+                    dbContext.SubmitChanges();
+                }
                 dbContext.user_order_products.DeleteAllOnSubmit(refDeleteOrder);
                 dbContext.SubmitChanges();
                 dbContext.user_orders.DeleteOnSubmit(deleteOrder);

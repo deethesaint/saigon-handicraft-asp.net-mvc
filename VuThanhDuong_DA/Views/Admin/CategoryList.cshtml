@@ -50,8 +50,22 @@
                                     @counts[index++]
                                 </td>
                                 <td class="text-center">
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.product_category_id }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.product_category_id })
+                                    <a class="btn btn-primary" href="~/Admin/ProductList/?id=@item.product_category_id">Danh sách sản phẩm</a>
+                                    <a class="btn btn-success" href="~/Admin/CategoryEdit/?id=@item.product_category_id">Sửa</a>
+                                    <button class="btn btn-danger" onclick="confirmDelete('@item.product_category_id')">Xóa</button>
+                                </td>
+                            </tr>
+                            <tr id="@item.product_category_id" class="border-0 hiddenComp">
+                                <td colspan="4">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 text-right">
+                                                <p class="d-inline">Bạn có chắc muốn xóa?</p>
+                                                <a class="btn btn-primary" href="~/Admin/CategoryDelete/?id=@item.product_category_id">Chắc chắn</a>
+                                                <button class="btn btn-secondary" onclick="noDelete('@item.product_category_id')">Không</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -61,3 +75,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmDelete(string) {
+        $('#' + string).removeClass("hiddenComp");
+    }
+    function noDelete(string) {
+        $('#' + string).addClass("hiddenComp");
+    }
+</script>

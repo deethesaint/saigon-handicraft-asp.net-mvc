@@ -98,12 +98,66 @@ namespace VuThanhDuong_DA.Controllers
 
         public ActionResult Edit()
         {
-            return View();
+            if (Session["currentUser"] != null)
+                return View(Session["currentUser"] as user_account);
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public ActionResult Edit(user_account ua)
         {
+            if (Session["currentUser"] != null)
+            {
+                using (var dbContext = new SHSDBDataContext())
+                {
+                    user_account changedAccount = dbContext.user_accounts.SingleOrDefault(u => u.user_account_id == ua.user_account_id);
+                    changedAccount.user_firstname = ua.user_firstname;
+                    changedAccount.user_lastname = ua.user_lastname;
+                    changedAccount.user_address = ua.user_address;
+                    changedAccount.user_phonenumber = ua.user_phonenumber;
+                    changedAccount.user_gender = ua.user_gender;
+                    changedAccount.user_email = ua.user_email;
+                    dbContext.SubmitChanges();
+                    Session["currentUser"] = changedAccount;
+                    ViewBag.editSucceed = "Thay đổi thông tin thành công!";
+                }
+            }
+            return View(Session["currentUser"] as user_account);
+        }
+
+        public ActionResult ChangePassword()
+        {
+            if (Session["currentUser"] != null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(FormCollection c)
+        {
+            using (var dbContext = new SHSDBDataContext())
+            {
+                user_account ua = dbContext.user_accounts.SingleOrDefault(d => d.user_account_id == (Session["currentUser"] as user_account).user_account_id);
+                if (Request["currentPassword"] != ua.user_password)
+                {
+                    ViewBag.wrong = "Mật khẩu hiện tại không chính xác!";
+                    return ChangePassword();
+                }
+                else if (Request["newPassword"] != Request["rePassword"])
+                {
+                    ViewBag.wrong = "Nhập lại mật khẩu không khớp!";
+                    return ChangePassword();
+                }
+                else
+                {
+                    ua.user_password = Request["newPassword"];
+                    dbContext.SubmitChanges();
+                    ViewBag.changeSucceed = "Thay đổi mật khẩu thành công!";
+                }
+            }
             return View();
         }
     }

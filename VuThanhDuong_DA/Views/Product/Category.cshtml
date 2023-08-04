@@ -10,6 +10,9 @@
 @{
     Html.MvcSiteMap().SiteMap.CurrentNode.Title = ViewBag.categoryTitle;
 }
+@{
+    int numRange = 1;
+}
 
 <div class="container-fluid mt-3 pb-3">
     <div class="row-pl-2 mb-3 border-bottom">
@@ -21,11 +24,11 @@
     <div class="row-pl-2 mb-3 pb-3 border-bottom">
         <div class="col-12 text-right">
             <span><i class="fa-solid fa-filter d-inline"></i> Sắp xếp:</span>
-            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-not-equal"></i> Mặc định</a>
-            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-a-z"></i> A-Z</a>
-            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-a-z"></i> Z-A</a>
-            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-1-9"></i> Giá tăng dần</a>
-            <a href="#!" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-1-9"></i> Giá giảm dần</a>
+            <a href="~/Product/Category/?id=@ViewBag.id&displaymode=@FilterMode.DEFAULT" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-not-equal"></i> Mặc định</a>
+            <a href="~/Product/Category/?id=@ViewBag.id&displaymode=@FilterMode.ATOZ" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-a-z"></i> A-Z</a>
+            <a href="~/Product/Category/?id=@ViewBag.id&displaymode=@FilterMode.ZTOA" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-a-z"></i> Z-A</a>
+            <a href="~/Product/Category/?id=@ViewBag.id&displaymode=@FilterMode.ONETONINE" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-up-1-9"></i> Giá tăng dần</a>
+            <a href="~/Product/Category/?id=@ViewBag.id&displaymode=@FilterMode.NINETOONE" class="btn btn-outline-dark d-inline"><i class="fa-solid fa-arrow-down-1-9"></i> Giá giảm dần</a>
         </div>
     </div>
     <div class="row pl-2">
@@ -33,8 +36,11 @@
             var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
             foreach (var p in Model)
             {
+                <div>
+
+                </div>
                 <a href="~/Product/Details/?id=@p.product_id">
-                    <div class="card m-1" style="width: 17vw">
+                    <div id="@numRange" class="card m-1 hiddenComp" style="width: 17vw">
                         <img class="card-img-top img-fluid" src="~/Images/@p.product_thumbnail_image" style="width: 100vw; height: 170px" />
                         <div class="card-footer text-center">
                             <p class="font-weight-bold text-truncate" style="width: 100%">
@@ -54,7 +60,33 @@
                         }
                     </div>
                 </a>
+                numRange++;
             }
         }
+        <div class="col-12 text-center mt-4">
+            <button id="btnLoad" class="btn btn-outline-dark" onclick="loadMore()">Tải thêm</button>
+        </div>
     </div>
 </div>
+
+<script>
+    let max = @numRange;
+    let x = 12;
+    $(document).ready(function () {
+        if (12 >= max - 1) {
+            $("#btnLoad").addClass("hiddenComp");
+        }
+        for (let i = 1; i <= 12; ++i) {
+            $("#" + i.toString()).removeClass("hiddenComp");
+        }
+    });
+    function loadMore() {
+        if (x + 12 >= max) {
+            $("#btnLoad").addClass("hiddenComp");
+        }
+        for (let i = x + 1; i <= x + 12; ++i) {
+            $("#" + i.toString()).removeClass("hiddenComp");
+        }
+        x += 12;
+    }
+</script>
